@@ -1,10 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
+import os
 from flask_wtf import Form
+import urllib.request
 from flask_wtf.file import FileField
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = 'E:/PROJECT/ipp/uploads'
 app = Flask(__name__)
+
 app.secret_key = 'many random bytes'
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -13,30 +21,71 @@ app.config['MYSQL_DB'] = 'ipp'
 
 mysql = MySQL(app)
 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','xlsx'])
+
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @app.route('/')
 def index():
 
     return render_template('index2.html')
 
-@app.route('/upload',methods=['GET','POST'])
-def upload():
-    class excel_file(Form):
-        csv_label = FileField("Your CSV")
-    return render_template('upload.html')
+@app.route('/upload')
+def upload_form():
+	return render_template('upload.html')
+
+@app.route('/upload', methods = ['GET','POST'])
+def upload_file():
+	if request.method == 'POST':
+        # check if the post request has the file part
+		if 'file' not in request.files:
+			flash('No file part')
+			return redirect(request.url)
+		file = request.files['file']
+		if file.filename == '':
+			flash('No file selected for uploading')
+			return redirect(request.url)
+		if file and allowed_file(file.filename):
+			filename = secure_filename(file.filename)
+			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			flash('File successfully uploaded')
+			return redirect(request.url)
+		else:
+			flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+			return redirect(request.url)
+
+
 @app.route('/comp', methods = ['GET','POST'])
 def comp():
 
     if request.method == "POST":
-        flash("Data Inserted Successfully")
-        comp_name = request.form['comp_name']
-        comp_uid = request.form['comp_uid']
-        comp_address = request.form['comp_address']
-        comp_location = request.form['comp_location']
-        comp_GSTN = request.form['comp_GSTN']
-        comp_description = request.form['comp_description']
+        Sr_No = request.form['Sr_No']
+        Name_of_Company = request.form['Name_of_Company']
+        Company_ID = request.form['Company_ID']
+        Unit = request.form['Unit']
+        Address = request.form['Address']
+        State = request.form['State']
+        PinCode = request.form['PinCode']
+        Customer_Contact_Person = request.form['Customer_Contact_Person']
+        Customer_Contact_Number = request.form['Customer_Contact_Number']
+        Supervisor = request.form['Supervisor']
+        Reporting_1 = request.form['Reporting_1']
+        Reporting_2 = request.form['Reporting_2']
+        Reporting_3 = request.form['Reporting_3']
+        Reporting_4 = request.form['Reporting_4']
+        Reporting_5 = request.form['Reporting_5']
+        Closed_By = request.form['Closed_By']
+        Services_A = request.form['Services_A']
+        Services_Model = request.form['Services_Model']
+        Reputation_of_client = request.form['Reputation_of_client']
+        Service_Charges = request.form['Service_Charges']
+        Actual_Stipend = request.form['Actual_Stipend']
+        Working_Condition = request.form['Working_Condition']
+        Facilities = request.form['Facilities']
 
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO company_table (comp_name,comp_uid,comp_address,comp_location,comp_GSTN,comp_description) VALUES (%s, %s, %s,%s,%s,%s)", (comp_name, comp_uid,comp_address,comp_location,comp_GSTN,comp_description))
+        cur1 = mysql.connection.cursor()
+        cur1.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities))
         mysql.connection.commit()
         return redirect(url_for('index'))
 
@@ -46,25 +95,40 @@ def comp():
 def dod():
     data="";
     if request.method == "POST" :
-
         if request.form['submit_button']=='Submit':
-            reputation_client = request.form['reputation_client']
-            print(reputation_client);
-            training_fee = request.form['training_fee']
-            stipend = request.form['stipend']
-            working_condition = request.form['working_condition']
-            transport_canteen_facility = request.form['transport_canteen_facility']
-            others = request.form['others']
-            defaults = request.form['defaults']
+            Sr_No = request.form['Sr_No']
+            Name_of_Company = request.form['Name_of_Company']
+            Company_ID = request.form['Company_ID']
+            Unit = request.form['Unit']
+            Address = request.form['Address']
+            State = request.form['State']
+            Pincode = request.form['Pincode']
+            Customer_Contact_Person = request.form['Customer_Contact_Person']
+            Customer_Contact_Number = request.form['Customer_Contact_Number']
+            Supervisor = request.form['Supervisor']
+            Reporting_1 = request.form['Reporting_1']
+            Reporting_2 = request.form['Reporting_2']
+            Reporting_3 = request.form['Reporting_3']
+            Reporting_4 = request.form['Reporting_4']
+            Reporting_5 = request.form['Reporting_5']
+            Closed_By = request.form['Closed_By']
+            Services_A = request.form['Services_A']
+            Services_Model = request.form['Services_Model']
+            Reputation_of_client = request.form['Reputation_client']
+            Service_Charges = request.form['Service_Charges']
+            Actual_Stipend = request.form['Actual_Stipend']
+            Working_Condition = request.form['Working_Condition']
+            Facilities = request.form['Facilities']
 
             cur1 = mysql.connection.cursor()
-            cur1.execute("INSERT INTO dod_table (reputation_client,training_fee,stipend,working_condition,transport_canteen_facility,others) VALUES (%s, %s, %s, %s,%s,%s)", (reputation_client,training_fee,stipend,working_condition,transport_canteen_facility,others))
+            cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'(Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities))
             mysql.connection.commit()
             return redirect(url_for('index'))
         elif request.form['submit_button']=='search':
             search_rep = request.form['search']
+            
             cur = mysql.connection.cursor()
-            cur.execute("SELECT  * FROM dod_table WHERE reputation_client = %s",(search_rep))
+            cur.execute("SELECT * FROM company_master_table WHERE Unit = %s",(search_rep,))
 
             data = cur.fetchall()
             print(data);

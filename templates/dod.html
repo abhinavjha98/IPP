@@ -101,7 +101,7 @@
             </nav>
 
             <form method="post">
-              
+
               <div class="form-row align-items-center">
                 <div class="form-group mb-2 col-3">
                   <label for="exampleInputEmail1">Enter company ID</label>
@@ -117,8 +117,8 @@
                   <label for="exampleInputEmail1">Reputation of Client</label>
                 </div>
               <div class="form-group mx-sm-3 mb-2 col-4">
-                <p name="reputation_client" id="ab">hello</p>
-                <input type="text" force_save="1" value="7" name="" class="form-control"  aria-describedby="emailHelp" placeholder="Add reputation of client">
+
+                <input type="text" force_save="1" value="{{row.18}}" name="" class="form-control"  aria-describedby="emailHelp" placeholder="Add reputation of client">
               </div>
             <input type="button" onclick="myFunction()" value="Make Editable" class="rounded-sm makeEditable " style="background-color: #dc3545;;border: none;
             color: white;
@@ -145,7 +145,7 @@
                   <label for="exampleInputEmail1">Actual Stipend</label>
                 </div>
               <div class="form-group mx-sm-3 mb-2 col-4">
-              <input type="name" value="{{row.0}}" name="stipend" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter stipend">
+              <input type="name" value="{{row.19}}" name="stipend" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter stipend">
               </div>
               <button type="submit" name="submit_button" value="edit" class="btn btn-primary mb-2 btn-danger">Edit</button>
               </div>
@@ -155,7 +155,7 @@
                   <label for="exampleInputEmail1">Working Condition</label>
                 </div>
               <div class="form-group mx-sm-3 mb-2 col-4">
-              <input type="name" name="working_condition" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter working condition">
+              <input type="name" name="working_condition" value="{{row.20}}"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter working condition">
               </div>
               <button type="submit" name="submit_button" value="edit" class="btn btn-primary mb-2 btn-danger">Edit</button>
               </div>
@@ -165,7 +165,7 @@
                   <label for="exampleInputEmail1">Transport and Canteen Facility</label>
                 </div>
               <div class="form-group mx-sm-3 mb-2 col-4">
-                  <input type="name" name="transport_canteen_facility" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter transport and Canteen facility">
+                  <input type="name" name="transport_canteen_facility" value="{{row.21}}"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter transport and Canteen facility">
               </div>
               <button type="submit" name="submit_button" value="edit" class="btn btn-primary mb-2 btn-danger">Edit</button>
               </div>
@@ -175,7 +175,7 @@
                   <label for="exampleInputEmail1">Others</label>
                 </div>
               <div class="form-group mx-sm-3 mb-2 col-4">
-                <input type="name" name="others" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter others">
+                <input type="name" name="others" class="form-control" value="{{row.22}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter others">
               </div>
               <button type="submit" name="submit_button" value="edit" class="btn btn-primary mb-2 btn-danger">Edit</button>
               </div>
