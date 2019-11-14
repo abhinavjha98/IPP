@@ -32,7 +32,7 @@
 
             <ul class="list-unstyled components">
 	          <li>
-                    <a href="#">Company Management</a>
+                    <a href="{{url_for('comp')}}">Company Management</a>
                 </li>
                 <li>
                     <a href="#">Service Management</a>
@@ -44,7 +44,7 @@
                     <a href="#">Employee Management</a>
                 </li>
                 <li>
-                    <a href="#">DoD Setup</a>
+                    <a href="{{url_for('dod')}}">DoD Setup</a>
                 </li>
 
                 <li>
@@ -57,15 +57,15 @@
                     <a href="#">Historical Data</a>
                 </li>
                 <li>
-                    <a href="#">Data Uploads</a>
+                    <a href="{{url_for('uploads')}}">Data Uploads</a>
                 </li>
 
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Login</a>
+                    <a href="{{url_for('login')}}" class="download">Login</a>
                 </li>
                 <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Register</a>
+                    <a href="{{url_for('login')}}" class="article">Register</a>
                 </li>
             </ul>
         </nav>
@@ -100,7 +100,6 @@
                 </div>
             </nav>
 
-INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities
             <form method="post">
 
               <div class="form-row align-items-center">
@@ -304,20 +303,6 @@ INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,
             <button type="submit" name="submit_button" value="Submit" class="btn btn-primary">Submit</button>
             </form>
 
-            <div class="line"></div>
-
-            <h2>Lorem Ipsum Dolor</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-            <div class="line"></div>
-
-            <h2>Lorem Ipsum Dolor</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-            <div class="line"></div>
-
-            <h3>Lorem Ipsum Dolor</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
     </div>
 
