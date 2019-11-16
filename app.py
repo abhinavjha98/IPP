@@ -7,7 +7,8 @@ from flask_wtf.file import FileField
 import csv
 import mysql.connector as ms
 from werkzeug.utils import secure_filename
-
+from flask import send_file
+import pandas as pd
 UPLOAD_FOLDER = 'E:/PROJECT/ipp/uploads'
 app = Flask(__name__)
 
@@ -57,12 +58,71 @@ def login():
                 print("Please check your password")
                 return render_template('login.html')
             mysql.connection.commit()
-    return render_template('login.html')        
-    
+    return render_template('login.html')
+
 
 @app.route('/uploads')
 def upload_form():
 	return render_template('uploads.html')
+
+@app.route('/download',methods=['GET','POST'])
+def download():
+    if request.method == 'POST':
+        mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+        cursor=mydb.cursor()
+        cursor.execute("SELECT * FROM services_invoice")
+        data1=cursor.fetchall()
+        df = pd.DataFrame(data1,columns=['Sr.No','Name_of_Company','Company_ID','Services','Model','Unit','Invoice Value'])
+        df.to_csv('E:/PROJECT/ipp/static/Final.csv',index=False)
+        path = "E:/PROJECT/ipp/static/Final.csv"
+        return send_file(path,mimetype='text/csv' ,attachment_filename='Final.csv',as_attachment=True)
+    return render_template('download.html')
+
+@app.route('/reports',methods=['GET','POST'])
+def reports():
+    if request.method== 'POST':
+        if request.form['submit_button']=='IPP':
+            print("hello")
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+            cursor=mydb.cursor()
+            cursor1=mydb.cursor()
+            cursor.execute("SELECT * FROM services_invoice")
+            data3 = cursor.fetchall()
+            data = pd.DataFrame(data3,columns=['Sr.No','Name_of_Company','Company_ID','Month','Services','Model','Unit','Invoice Value'])
+            cursor1.execute("SELECT * FROM company_master_table")
+            data2=cursor1.fetchall()
+            data1 = pd.DataFrame(data2,columns=['Sr_No','Name_of_Company','Company_ID','Month','Unit','Address','State','PinCode','Customer_Contact_Person','Customer_Contact_Number','Supervisor','Reporting_1','Reporting_2','Reporting_3','Reporting_4','Reporting_5','Closed_By','Services_A','Services_Model','Reputation_of_client','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
+            for i in data1.index:
+                id1 = data1.get_value(i,'Company_ID')
+                rc = data1.get_value(i,'Reputation_of_client')
+                sc = data1.get_value(i,'Service_Charges')
+                acs = data1.get_value(i,'Actual_Stipend')
+                nc = data1.get_value(i,'Name_of_Company')
+                wc = data1.get_value(i,'Working_Condition')
+                fc = data1.get_value(i,'Facilities')
+                others = data1.get_value(i,'others')
+                cuv = rc*sc*acs*wc*fc*others
+                ac=1
+                a=0
+                tcu=0
+                for j in data.index:
+                    id2 = data.get_value(j,'Company_ID')
+                    month = data.get_value(j,'Month')
+                    sv = data.get_value(j,'Services')
+                    iv = data.get_value(j,'Invoice Value')
+                    unit = data.get_value(j,'Unit')
+                    if id1 == id2:
+                        ac = unit
+                        tcu=a+ac
+                        a=ac
+                ipp = (tcu/30)*cuv
+                cur1 = mydb.cursor()
+                row=[int(id1),nc,month,sv,int(unit),int(iv),float(ipp)]
+                cur1.execute('INSERT INTO ipp_company (Company_ID,Name_of_Company,Months,Services,Unit,Invoice_Value,IPP) VALUES (%s,%s,%s,%s,%s,%s,%s)',row)
+                mydb.commit()
+                print(ipp)
+
+    return render_template('reports.html')
 
 @app.route('/uploads', methods = ['GET','POST'])
 def uploads():
@@ -76,7 +136,7 @@ def uploads():
             cursor=mydb.cursor()
             csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sample1.csv'))
             for row in csv_data:
-                cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
                 print(row)
             mydb.commit()
             cursor.close()
@@ -130,9 +190,9 @@ def comp():
         Actual_Stipend = request.form['Actual_Stipend']
         Working_Condition = request.form['Working_Condition']
         Facilities = request.form['Facilities']
-
+        others = request.form['others']
         cur1 = mysql.connection.cursor()
-        cur1.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities))
+        cur1.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others))
         mysql.connection.commit()
         return redirect(url_for('index'))
 
@@ -141,6 +201,9 @@ def comp():
 @app.route('/dod',methods = ['GET','POST'])
 def dod():
     data="";
+    data1="";
+    b=0;
+    c=1;
     if request.method == "POST" :
         if request.form['submit_button']=='Submit':
             Sr_No = request.form['Sr_No']
@@ -166,23 +229,27 @@ def dod():
             Actual_Stipend = request.form['Actual_Stipend']
             Working_Condition = request.form['Working_Condition']
             Facilities = request.form['Facilities']
+            others = request.form['others']
 
             cur1 = mysql.connection.cursor()
-            cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'(Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities))
+            cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'(Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others))
             mysql.connection.commit()
             return redirect(url_for('index'))
         elif request.form['submit_button']=='search':
             search_rep = request.form['search']
 
             cur = mysql.connection.cursor()
-            cur.execute("SELECT * FROM company_master_table WHERE Unit = %s",(search_rep,))
-
+            cur1 = mysql.connection.cursor()
+            cur.execute("SELECT * FROM company_master_table WHERE Company_ID = %s",(search_rep,))
             data = cur.fetchall()
-            print(data);
+            cur1.execute("SELECT * FROM services_invoice WHERE Company_ID = %s",(search_rep,))
+            data1=cur1.fetchall()
+            for i in data1:
+               b+=i[5]
             cur.close()
     else:
         pass
-    return render_template('dod.html',students=data)
+    return render_template('dod.html',students=data,service=data1,b=b)
 
 
 

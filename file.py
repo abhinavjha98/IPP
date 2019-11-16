@@ -6,7 +6,7 @@ mydb = mysql.connector.connect(host='localhost',user='root',password='',database
 print('database connected')
 cursor=mydb.cursor()
 
-cursor.execute("SELECT * FROM company_master_table WHERE Unit= %s", (78,))
+cursor.execute("SELECT UNIT FROM company_master_table WHERE Unit= %s", (254,))
 
 data = cursor.fetchall()
 print(type(data))

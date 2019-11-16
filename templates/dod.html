@@ -120,7 +120,7 @@
 
                 <input type="text" force_save="1" value="{{row.18}}" name="" class="form-control"  aria-describedby="emailHelp" placeholder="Add reputation of client">
               </div>
-    
+
 
               </div>
 
@@ -131,7 +131,7 @@
               <div class="form-group mx-sm-3 mb-2 col-4">
                 <input type="name" name="training_fee" value="{{row.19}}"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter training fee">
               </div>
-              
+
               </div>
 
               <div class="form-row align-items-center">
@@ -141,7 +141,7 @@
               <div class="form-group mx-sm-3 mb-2 col-4">
               <input type="name" value="{{row.20}}" name="stipend" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter stipend">
               </div>
-              
+
               </div>
 
               <div class="form-row align-items-center">
@@ -151,7 +151,7 @@
               <div class="form-group mx-sm-3 mb-2 col-4">
               <input type="name" name="working_condition" value="{{row.21}}"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter working condition">
               </div>
-              
+
               </div>
 
               <div class="form-row align-items-center">
@@ -161,9 +161,17 @@
               <div class="form-group mx-sm-3 mb-2 col-4">
                   <input type="name" name="transport_canteen_facility" value="{{row.22}}"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter transport and Canteen facility">
               </div>
-             
+
+              </div>
+              <div class="form-row align-items-center">
+                <div class="form-group mb-2 col-3">
+                  <label for="exampleInputEmail1">Others</label>
+                </div>
+              <div class="form-group mx-sm-3 mb-2 col-4">
+                <input type="name" name="others"  value="{{row.23}}"class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Default value is 7">
               </div>
 
+              </div>
               <div class="form-row align-items-center">
                 <div class="form-group mb-2 col-3">
                   <label for="exampleInputEmail1">Value in Rupees per point</label>
@@ -171,13 +179,42 @@
               <div class="form-group mx-sm-3 mb-2 col-4">
                 <input type="name" name="defaults" value="7" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Default value is 7">
               </div>
-              
+
               </div>
-              <p>{{row.22+row.21+row.20+7.0}}</p>
+              <div class="form-row align-items-center">
+                <div class="form-group mb-2 col-3">
+                  <label for="exampleInputEmail1">Company Unit Value</label>
+                </div>
+              <div class="form-group mx-sm-3 mb-2 col-4">
+                <input type="name" name="defaults" value="{{row.22*row.21*row.20*row.19*row.18*7.0}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Default value is 7">
+              </div>
+
+              </div>
+              <div class="form-row align-items-center">
+                <div class="form-group mb-2 col-3">
+                  <label for="exampleInputEmail1">Total Company Units (TCU) </label>
+                </div>
+              <div class="form-group mx-sm-3 mb-2 col-4">
+                <input type="name" name="defaults" value="{{b}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Default value is 7">
+              </div>
+
+              </div>
+              <div class="form-row align-items-center">
+                <div class="form-group mb-2 col-3">
+                  <label for="exampleInputEmail1">Total incentive for the company  </label>
+                </div>
+              <div class="form-group mx-sm-3 mb-2 col-4">
+                <input type="name" name="defaults" value="{{(b/30.0)*row.22*row.21*row.20*row.19*row.18*7.0}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Default value is 7">
+              </div>
+
+              </div>
+
 
   <button type="submit" name="submit_button" value="Submit" class="btn btn-primary">Submit</button>
   {% endfor  %}
 </form>
+
+
         </div>
     </div>
 
