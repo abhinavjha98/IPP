@@ -72,7 +72,7 @@ def download():
         cursor=mydb.cursor()
         cursor.execute("SELECT * FROM services_invoice")
         data1=cursor.fetchall()
-        df = pd.DataFrame(data1,columns=['Sr.No','Name_of_Company','Company_ID','Services','Model','Unit','Invoice Value'])
+        df = pd.DataFrame(data1,columns=['Sr_No','Name_of_Company','Company_ID','Month','Services','Model','Unit','Invoice_Value'])
         df.to_csv('E:/PROJECT/ipp/static/Final.csv',index=False)
         path = "E:/PROJECT/ipp/static/Final.csv"
         return send_file(path,mimetype='text/csv' ,attachment_filename='Final.csv',as_attachment=True)
@@ -134,9 +134,25 @@ def uploads():
             print('database connected')
 
             cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sample1.csv'))
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/samples.csv'))
             for row in csv_data:
-                cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Month,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                print(row)
+            mydb.commit()
+            cursor.close()
+
+
+            return redirect(request.url)
+        elif request.form['submit_button']=='edit1':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/samp.csv'))
+            for row in csv_data:
+                cursor.execute('INSERT INTO services_invoice (Sr_No,Name_of_Company,Company_ID,Month,Services,Model,Unit,Invoice_Value) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',row)
                 print(row)
             mydb.commit()
             cursor.close()
@@ -161,6 +177,24 @@ def uploads():
             else:
                 flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
                 return redirect(request.url)
+
+        elif request.form['submit_button']=='Submit1':
+            if 'file' not in request.files:
+
+                return redirect(request.url)
+            file = request.files['file']
+            if file.filename == '':
+                flash('No file selected for uploading')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('File successfully uploaded')
+                return redirect(request.url)
+            else:
+                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+                return redirect(request.url)
+
 
 
 @app.route('/comp', methods = ['GET','POST'])
