@@ -101,83 +101,16 @@
             </nav>
 
             <div class="line"></div>
-<div class="row">
-  <div class="col-md-3">
-            <h2>Select a file to upload</h2>
-            <p>
-	{% with messages = get_flashed_messages() %}
-	  {% if messages %}
-		<ul class=flashes>
-		{% for message in messages %}
-		  <li>{{ message }}</li>
-		{% endfor %}
-		</ul>
-	  {% endif %}
-	{% endwith %}
-</p>
-<form method="post" enctype="multipart/form-data">
-    <dl>
-		<p>
-			<input type="file" name="file" autocomplete="off" >
-		</p>
-    </dl>
-    <p>
-		<button type="submit" name="submit_button" value="Submit" class="btn btn-primary mb-2">Submit</button>
-	</p>
-    <button type="submit" name="submit_button" value="edit" class="btn btn-primary mb-2 btn-danger">Click For Saving the data</button>
+            <form method="POST">
+  <select name="cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="fiat">Fiat</option>
+    <option value="audi">Audi</option>
+  </select>
+  <br><br>
+  <button type="submit" name="submit_button" value="Submit" class="btn btn-primary">Submit</button>
 </form>
-</div>
-<div class="col-md-3">
-  <h2>Select a file to upload</h2>
-  <p>
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul class=flashes>
-  {% for message in messages %}
-  <li>{{ message }}</li>
-  {% endfor %}
-  </ul>
-  {% endif %}
-  {% endwith %}
-  </p>
-  <form method="post" enctype="multipart/form-data">
-  <dl>
-  <p>
-  <input type="file" name="file" autocomplete="off" >
-  </p>
-  </dl>
-  <p>
-  <button type="submit" name="submit_button" value="Submit1" class="btn btn-primary mb-2">Submit</button>
-  </p>
-  <button type="submit" name="submit_button" value="edit1" class="btn btn-primary mb-2 btn-danger">Click For Saving the data</button>
-  </form>
-</div>
-<div class="col-md-3">
-  <h2>Select a file to upload</h2>
-  <p>
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul class=flashes>
-  {% for message in messages %}
-  <li>{{ message }}</li>
-  {% endfor %}
-  </ul>
-  {% endif %}
-  {% endwith %}
-  </p>
-  <form method="post" enctype="multipart/form-data">
-  <dl>
-  <p>
-  <input type="file" name="file" autocomplete="off" >
-  </p>
-  </dl>
-  <p>
-  <button type="submit" name="submit_button" value="Submit2" class="btn btn-primary mb-2">Submit</button>
-  </p>
-  <button type="submit" name="submit_button" value="edit2" class="btn btn-primary mb-2 btn-danger">Click For Saving the data</button>
-  </form>
-</div>
-</div>
 
         </div>
     </div>

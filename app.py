@@ -159,6 +159,24 @@ def uploads():
 
 
             return redirect(request.url)
+        elif request.form['submit_button']=='edit2':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/Book1.csv'))
+            print(csv_data)
+            for row in csv_data:
+                print(len(row))
+                cursor.execute('INSERT INTO employee_master (Sr_No,Prepared_By,Code,Emp_No,Name,Gender,Father_Name,DOB,DOJ,Paid_By,Cost_Centre,Employee_Name_On_Passbook,Bank_Name,Branch_Name,IFSC_Code,Beneficiary_Account_Number,Beneficiary_City,State,email_address,pay_days,total_days,location,Bank_State,CPI_eligibility,Designation,ODOJ,Level,Direct_Indirect,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Personal_Official_No) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                print(row)
+            mydb.commit()
+            cursor.close()
+
+
+            return redirect(request.url)
 
         # check if the post request has the file part
         elif request.form['submit_button']=='Submit':
@@ -179,6 +197,23 @@ def uploads():
                 return redirect(request.url)
 
         elif request.form['submit_button']=='Submit1':
+            if 'file' not in request.files:
+
+                return redirect(request.url)
+            file = request.files['file']
+            if file.filename == '':
+                flash('No file selected for uploading')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('File successfully uploaded')
+                return redirect(request.url)
+            else:
+                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+                return redirect(request.url)
+
+        elif request.form['submit_button']=='Submit2':
             if 'file' not in request.files:
 
                 return redirect(request.url)
@@ -287,6 +322,13 @@ def dod():
 
 
 
+@app.route('/update',methods = ['GET','POST'])
+def update():
+    if request.method == "POST" :
+        if request.form['submit_button']=='Submit':
+            a = request.form['cars']
+            print(a)
+    return render_template('update.html')
 
 if __name__=='__main__':
     app.run(debug=True)
