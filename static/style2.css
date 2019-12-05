@@ -62,18 +62,18 @@ a:focus {
     left: 0;
     height: 100vh;
     z-index: 999;
-    background: #7386D5;
+    background: #dc3545;
     color: #fff;
     transition: all 0.3s;
 }
 
 #sidebar.active {
     margin-left: -250px;
-}
+}   
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background:#dc3545;
 }
 
 #sidebar ul.components {

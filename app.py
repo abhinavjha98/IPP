@@ -94,15 +94,18 @@ def reports():
             data1 = pd.DataFrame(data2,columns=['Sr_No','Name_of_Company','Company_ID','Month','Unit','Address','State','PinCode','Customer_Contact_Person','Customer_Contact_Number','Supervisor','Reporting_1','Reporting_2','Reporting_3','Reporting_4','Reporting_5','Closed_By','Services_A','Services_Model','Reputation_of_client','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
             for i in data1.index:
                 id1 = data1.get_value(i,'Company_ID')
-                rc = data1.get_value(i,'Reputation_of_client')
                 sc = data1.get_value(i,'Service_Charges')
                 acs = data1.get_value(i,'Actual_Stipend')
                 nc = data1.get_value(i,'Name_of_Company')
                 wc = data1.get_value(i,'Working_Condition')
                 fc = data1.get_value(i,'Facilities')
                 others = data1.get_value(i,'others')
-                cuv = rc*sc*acs*wc*fc*others
+                cuv = sc*acs*wc*fc*others
+
                 ac=1
+                ivv=0
+                tvv=0
+                tc=1
                 a=0
                 tcu=0
                 for j in data.index:
@@ -114,13 +117,19 @@ def reports():
                     if id1 == id2:
                         ac = unit
                         tcu=a+ac
-                        a=ac
+                        a=tcu
+                    if id1 == id2:
+                        tc = iv
+                        tvv = ivv+tc
+                        ivv = tvv
+                print(ivv)
                 ipp = (tcu/30)*cuv
+                ipp = ipp*7
                 cur1 = mydb.cursor()
-                row=[int(id1),nc,month,sv,int(unit),int(iv),float(ipp)]
+                row=[int(id1),nc,month,sv,int(tcu),int(ivv),float(ipp)]
                 cur1.execute('INSERT INTO ipp_company (Company_ID,Name_of_Company,Months,Services,Unit,Invoice_Value,IPP) VALUES (%s,%s,%s,%s,%s,%s,%s)',row)
                 mydb.commit()
-                print(ipp)
+                
 
     return render_template('reports.html')
 
@@ -135,7 +144,9 @@ def uploads():
 
             cursor=mydb.cursor()
             csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/samples.csv'))
+
             for row in csv_data:
+                print(row)
                 cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Month,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
                 print(row)
             mydb.commit()
@@ -150,8 +161,9 @@ def uploads():
             print('database connected')
 
             cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/samp.csv'))
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sevices.csv'))
             for row in csv_data:
+                print(row)
                 cursor.execute('INSERT INTO services_invoice (Sr_No,Name_of_Company,Company_ID,Month,Services,Model,Unit,Invoice_Value) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',row)
                 print(row)
             mydb.commit()
@@ -166,11 +178,11 @@ def uploads():
             print('database connected')
 
             cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/Book1.csv'))
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/emp.csv'))
             print(csv_data)
             for row in csv_data:
                 print(len(row))
-                cursor.execute('INSERT INTO employee_master (Sr_No,Prepared_By,Code,Emp_No,Name,Gender,Father_Name,DOB,DOJ,Paid_By,Cost_Centre,Employee_Name_On_Passbook,Bank_Name,Branch_Name,IFSC_Code,Beneficiary_Account_Number,Beneficiary_City,State,email_address,pay_days,total_days,location,Bank_State,CPI_eligibility,Designation,ODOJ,Level,Direct_Indirect,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Personal_Official_No) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                cursor.execute('INSERT INTO employee_master (Sr_No,Prepared_By,Code,Emp_No,Name,Gender,Father_Name,DOB,DOJ,Paid_By,Cost_Centre,Employee_Name_On_Passbook,Bank_Name,Branch_Name,IFSC_Code,Beneficiary_Account_Number,Beneficiary_City,State,email_address,pay_days,total_days,location,Bank_State,CPI_eligibility,Designation,ODOJ,Level,Direct_Indirect,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Personal_Official_No,Company) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
                 print(row)
             mydb.commit()
             cursor.close()
