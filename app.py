@@ -342,5 +342,20 @@ def update():
             print(a)
     return render_template('update.html')
 
+@app.route('/showReport',methods = ['GET','POST'])
+def showReport():
+    data3=[]
+    if request.method == "POST":
+        if request.form['submit_button']=='IPP':
+            print("Hello")
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+            print('database connected')
+            cursor=mydb.cursor()
+            cursor.execute("SELECT * FROM services_invoice")
+            data3 = cursor.fetchall()
+            print(data3)
+            data = pd.DataFrame(data3,columns=['Sr.No','Name_of_Company','Company_ID','Month','Services','Model','Unit','Invoice Value'])
+    return render_template('showReport.html',data1=data3)
+
 if __name__=='__main__':
     app.run(debug=True)
