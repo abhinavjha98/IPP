@@ -347,15 +347,137 @@ def showReport():
     data3=[]
     if request.method == "POST":
         if request.form['submit_button']=='IPP':
-            print("Hello")
+            
             mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
             print('database connected')
             cursor=mydb.cursor()
-            cursor.execute("SELECT * FROM services_invoice")
+            cursor.execute("SELECT * FROM ipp_company")
             data3 = cursor.fetchall()
             print(data3)
-            data = pd.DataFrame(data3,columns=['Sr.No','Name_of_Company','Company_ID','Month','Services','Model','Unit','Invoice Value'])
+            data = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Month','Services','Unit','Invoice_Value','IPP'])
     return render_template('showReport.html',data1=data3)
 
+@app.route('/cpp',methods = ['GET','POST'])
+def cpp():
+    data3=[]
+    ivv = 0
+    cpp=0
+    direct1 = 0
+    direct2 = 0
+    direct3 = 0
+    indirect1 = 0
+    indirect2 = 0
+    indirect3 = 0
+    acparts=0
+    pid1=0
+    pid2=0
+    piid1=0
+    pid3 = 0
+    piid3=0
+    piid2=0
+    final=0
+    td1 = 0
+    td2 = 0
+    td3 = 0
+    tid1 = 0
+    tid2 = 0
+    tid3 = 0
+    if request.method == "POST":
+        if request.form['submit_button']=='IPP':
+            
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+            print('database connected')
+            cursor=mydb.cursor()
+            cursor.execute("SELECT * FROM ipp_company")
+            data3 = cursor.fetchall()
+            print(data3)
+            data = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Months','Services','Unit','Invoice Value','IPP'])
+            cursor=mydb.cursor()
+
+            cursor.execute("SELECT * FROM employee_master ")
+            data2=cursor.fetchall()
+            data1 = pd.DataFrame(data2,columns=['Sr_No','Prepared_By','Code','Emp_No','Name','Gender','Father_Name','DOB','DOJ','Paid_By','Cost_Centre','Employee_Name_On_Passbook','Bank_Name','Branch_Name','IFSC_Code','Beneficiary_Account_Number','Beneficiary_City','State','email_address','pay_days','total_days','location','Bank_State','CPI_eligibility','Designation','ODOJ','Level','Direct_Indirect','Reporting_1','Reporting_2','Reporting_3','Reporting_4','Reporting_5','Personal_Official_No','Company'])
+            print(data1['Level'])
+            direct1 = 0
+            direct2 = 0
+            direct3 = 0
+            indirect1 = 0
+            indirect2 = 0
+            indirect3 = 0
+            acparts=0
+            pid1=0
+            pid2=0
+            final=0
+            piid1=0
+            pid3 = 0
+            piid3=0
+            piid2=0
+            td1 = 0
+            td2 = 0
+            td3 = 0
+            tid1 = 0
+            tid2 = 0
+            tid3 = 0
+            for i in data1.index:
+                a = data1.get_value(i,'Level')
+                b = data1.get_value(i,'Direct_Indirect')
+                if a == "1" and b == "Direct":
+                    direct1 = direct1 + 1
+                elif a == "1" and b == "Indirect":
+                    indirect1 = indirect1 + 1
+                elif a == "2" and b == "Direct":
+                    direct2 = direct2 + 1
+                elif a == "2" and b == "Indirect":
+                    indirect2 = indirect2 + 1  
+            print(direct1)
+            ivv = 0
+            ivv18 = 0
+            cpp = 0
+            acparts = 0
+            for i in data.index:
+                iv = data.get_value(i,'Invoice Value')
+                ivv = ivv+iv
+            ivv18 = (ivv)/1.18
+            print(ivv18)
+            cpp = (ivv18*1)/100
+            print(cpp)
+
+            d1 = direct1 * 2
+            d2 = direct2 * 4
+            id1 = indirect1 * 1
+            id2 = indirect2 * 2
+
+            final = d1+d2+id1+id2
+            print(final)
+
+            acparts = cpp/final
+            print(acparts)
+
+            pid1 = acparts * 2
+            pid2 = acparts * 4
+            pid3 = acparts * 8
+            piid1 = acparts * 1
+            piid2 = acparts * 2
+            piid3 = acparts * 4
+
+            print(pid1)
+            print(pid2)
+            print(piid1)
+            print(piid2)
+
+            td1 = pid1 * direct1
+            td2 = pid2 * direct2
+            td3 = pid3 * direct3
+            tid1 = piid1 * indirect1
+            tid2 = piid2 * indirect2
+            tid3 = piid3 * indirect3
+
+            print(td1)
+            print(td2)
+            print(tid1)
+            print(tid2)
+
+            print(td1+td2+tid1+tid2)
+    return render_template('cpp.html',ivv=ivv,cpp=cpp,final=final,data1=data3,direct1=direct1,direct2=direct2,direct3=direct3,indirect1=indirect1,indirect2=indirect2,indirect3=indirect3,acparts=acparts,piid1=piid1,pid1=pid1,pid2=pid2,pid3=pid3,piid2=piid2,piid3=piid3,td1=td1,td2=td2,td3=td3,tid1=tid1,tid2=tid2,tid3=tid3)
 if __name__=='__main__':
     app.run(debug=True)

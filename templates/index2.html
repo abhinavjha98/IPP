@@ -27,11 +27,11 @@
         <!-- Sidebar  -->
         <nav id="sidebar" style="background-color: #007bff;">
             <div class="sidebar-header" style="background-color: #dc3545">
-                <h3>IPP</h3>
+                <h3><a href="{{url_for('index')}}">IPP</a></h3>
             </div>
 
             <ul class="list-unstyled components">
-	          <li>
+            <li>
                     <a href="{{ url_for('comp') }}">Company Management</a>
                 </li>
                 <li>
@@ -50,8 +50,11 @@
                 <li>
                     <a href="#">User Role</a>
                 </li>
-				<li>
-                    <a href="#">Reports</a>
+        <li>
+                    <a href="{{url_for('showReport')}}">IPP Report</a>
+                </li>
+                <li>
+                    <a href="{{url_for('cpp')}}">CPP Report</a>
                 </li>
                 <li>
                     <a href="#">Historical Data</a>

@@ -21,11 +21,11 @@
 
 </head>
 
-<body>
+<body>  
 
     <div class="wrapper">
         <!-- Sidebar  -->
-       <nav id="sidebar" style="background-color: #007bff;">
+        <nav id="sidebar" style="background-color: #007bff;">
             <div class="sidebar-header" style="background-color: #dc3545">
                 <h3><a href="{{url_for('index')}}">IPP</a></h3>
             </div>
@@ -104,85 +104,92 @@
             </nav>
 
             <div class="line"></div>
-<div class="row">
-  <div class="col-md-3">
-            <h3>Select a file to upload for company master</h3>
-            <p>
-	{% with messages = get_flashed_messages() %}
-	  {% if messages %}
-		<ul class=flashes>
-		{% for message in messages %}
-		  <li>{{ message }}</li>
-		{% endfor %}
-		</ul>
-	  {% endif %}
-	{% endwith %}
-</p>
-<form method="post" enctype="multipart/form-data">
-    <dl>
-		<p>
-			<input type="file" name="file" autocomplete="off" >
-		</p>
-    </dl>
-    <p>
-		<button type="submit" name="submit_button" value="Submit" class="btn btn-primary mb-2">Submit</button>
-	</p>
-    <button type="submit" name="submit_button" value="edit" class="btn btn-primary mb-2 btn-danger">Click For Saving the data</button>
-</form>
-</div>
-<div class="col-md-1"> </div>
-<div class="col-md-3">
-  <h3>Select a file to upload for units and invoice</h3>
-  <p>
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul class=flashes>
-  {% for message in messages %}
-  <li>{{ message }}</li>
-  {% endfor %}
-  </ul>
-  {% endif %}
-  {% endwith %}
-  </p>
-  <form method="post" enctype="multipart/form-data">
-  <dl>
-  <p>
-  <input type="file" name="file" autocomplete="off" >
-  </p>
-  </dl>
-  <p>
-  <button type="submit" name="submit_button" value="Submit1" class="btn btn-primary mb-2">Submit</button>
-  </p>
-  <button type="submit" name="submit_button" value="edit1" class="btn btn-primary mb-2 btn-danger">Click For Saving the data</button>
-  </form>
-</div>
-<div class="col-md-1"> </div>
-<div class="col-md-3">
-  <h3>Select a file to upload for employee master</h3>
-  <p>
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul class=flashes>
-  {% for message in messages %}
-  <li>{{ message }}</li>
-  {% endfor %}
-  </ul>
-  {% endif %}
-  {% endwith %}
-  </p>
-  <form method="post" enctype="multipart/form-data">
-  <dl>
-  <p>
-  <input type="file" name="file" autocomplete="off" >
-  </p>
-  </dl>
-  <p>
-  <button type="submit" name="submit_button" value="Submit2" class="btn btn-primary mb-2">Submit</button>
-  </p>
-  <button type="submit" name="submit_button" value="edit2" class="btn btn-primary mb-2 btn-danger">Click For Saving the data</button>
-  </form>
-</div>
-</div>
+            <form method="POST">
+                <button class="btn btn-primary" name="submit_button" value="IPP">Generate Cpp</button>
+
+            </form>
+            <h4>Training fees {{ivv}}      </h4>
+              <h4>Total Performance Incentives Amount {{cpp}}</h4>
+             <div class="line"></div> 
+            
+           <table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Count</th>
+      <th scope="col">Weightage</th>
+      <th scope="col">Total Parts</th>
+      <th scope="col">Pi amount</th>
+      <th scope="col">Total Pi amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Direct1</th>
+      <td>{{direct1}}</td>
+      <td>2</td>
+      <td>{{direct1 * 2}}</td>
+      <td>{{pid1}}</td>
+      <td>{{td1}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Direct2</th>
+      <td>{{direct2}}</td>
+      <td>4</td>
+      <td>{{direct2 * 4}}</td>
+      <td>{{pid2}}</td>
+      <td>{{td2}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Direct3</th>
+      <td>{{direct3}}</td>
+      <td>8</td>
+      <td>{{direct3 * 8}}</td>
+      <td>{{pid3}}</td>
+      <td>{{td3}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Indirect1</th>
+      <td>{{indirect1}}</td>
+      <td>1</td>
+      <td>{{indirect1 * 1}}</td>
+      <td>{{piid1}}</td>
+      <td>{{tid1}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Indirect2</th>
+      <td>{{indirect2}}</td>
+      <td>2</td>
+      <td>{{indirect2 * 2}}</td>
+      <td>{{piid2}}</td>
+      <td>{{tid2}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Indirect3</th>
+      <td>{{indirect3}}</td>
+      <td>4</td>
+      <td>{{indirect3 * 4}}</td>
+      <td>{{piid3}}</td>
+      <td>{{tid3}}</td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td>{{direct1+direct2+direct3+indirect2+indirect1+indirect3}}</td>
+      <td></td>
+      <td>{{final}}</td>
+      <td></td>
+      <td>{{td1+td2+td3+tid3+tid2+tid1}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Amount per part</th>
+      <td></td>
+      <td></td>
+      <td>{{acparts}}</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 
         </div>
     </div>
