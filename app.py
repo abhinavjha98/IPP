@@ -126,7 +126,7 @@ def reports():
                 ipp = (tcu/30)*cuv
                 ipp = ipp*7
                 cur1 = mydb.cursor()
-                row=[int(id1),nc,month,sv,int(tcu),int(ivv),float(ipp)]
+                row=[id1,nc,month,sv,int(tcu),int(ivv),float(ipp)]
                 cur1.execute('INSERT INTO ipp_company (Company_ID,Name_of_Company,Months,Services,Unit,Invoice_Value,IPP) VALUES (%s,%s,%s,%s,%s,%s,%s)',row)
                 mydb.commit()
                 
@@ -143,7 +143,7 @@ def uploads():
             print('database connected')
 
             cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/samples.csv'))
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sampcomp.csv'))
 
             for row in csv_data:
                 print(row)
@@ -161,7 +161,7 @@ def uploads():
             print('database connected')
 
             cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sevices.csv'))
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/comp.csv'))
             for row in csv_data:
                 print(row)
                 cursor.execute('INSERT INTO services_invoice (Sr_No,Name_of_Company,Company_ID,Month,Services,Model,Unit,Invoice_Value) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',row)
@@ -178,7 +178,7 @@ def uploads():
             print('database connected')
 
             cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/emp.csv'))
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/emp1.csv'))
             print(csv_data)
             for row in csv_data:
                 print(len(row))
@@ -310,7 +310,7 @@ def dod():
             Actual_Stipend = request.form['Actual_Stipend']
             Working_Condition = request.form['Working_Condition']
             Facilities = request.form['Facilities']
-            others = request.form['others']
+            others = 1
 
             cur1 = mysql.connection.cursor()
             cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'(Sr_No,Name_of_Company,Company_ID,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others))
