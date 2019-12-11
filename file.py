@@ -6,7 +6,10 @@ mydb = mysql.connector.connect(host='localhost',user='root',password='',database
 print('database connected')
 cursor=mydb.cursor()
 
-cursor.execute("SELECT UNIT FROM company_master_table WHERE Unit= %s", (254,))
+
+row=[int(id1),nc,month,sv,int(unit),int(iv),float(ipp)]
+cur1.execute('INSERT INTO ipp_company (Company_ID,Name_of_Company,Months,Services,Unit,Invoice_Value,IPP) VALUES (%s,%s,%s,%s,%s,%s,%s)',row)   
+mysql.connection.commit()
 
 data = cursor.fetchall()
 print(type(data))

@@ -88,10 +88,10 @@ def reports():
             cursor1=mydb.cursor()
             cursor.execute("SELECT * FROM services_invoice")
             data3 = cursor.fetchall()
-            data = pd.DataFrame(data3,columns=['Sr.No','Name_of_Company','Company_ID','Month','Services','Model','Unit','Invoice Value'])
-            cursor1.execute("SELECT * FROM company_master_table")
+            data = pd.DataFrame(data3,columns=['Sr.No','Name_of_Company','Company_ID','Services','Model','Unit','Invoice Value'])
+            cursor1.execute("SELECT * FROM company_master")
             data2=cursor1.fetchall()
-            data1 = pd.DataFrame(data2,columns=['Sr_No','Name_of_Company','Company_ID','Month','Unit','Address','State','PinCode','Customer_Contact_Person','Customer_Contact_Number','Supervisor','Reporting_1','Reporting_2','Reporting_3','Reporting_4','Reporting_5','Closed_By','Services_A','Services_Model','Reputation_of_client','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
+            data1 = pd.DataFrame(data2,columns=['Name_of_Company','Company_ID','Supervisor','Services','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
             for i in data1.index:
                 id1 = data1.get_value(i,'Company_ID')
                 sc = data1.get_value(i,'Service_Charges')
@@ -106,11 +106,12 @@ def reports():
                 ivv=0
                 tvv=0
                 tc=1
+                t=0
                 a=0
                 tcu=0
                 for j in data.index:
                     id2 = data.get_value(j,'Company_ID')
-                    month = data.get_value(j,'Month')
+                   
                     sv = data.get_value(j,'Services')
                     iv = data.get_value(j,'Invoice Value')
                     unit = data.get_value(j,'Unit')
@@ -118,16 +119,16 @@ def reports():
                         ac = unit
                         tcu=a+ac
                         a=tcu
-                    if id1 == id2:
-                        tc = iv
-                        tvv = ivv+tc
-                        ivv = tvv
                 print(ivv)
                 ipp = (tcu/30)*cuv
                 ipp = ipp*7
                 cur1 = mydb.cursor()
-                row=[id1,nc,month,sv,int(tcu),int(ivv),float(ipp)]
-                cur1.execute('INSERT INTO ipp_company (Company_ID,Name_of_Company,Months,Services,Unit,Invoice_Value,IPP) VALUES (%s,%s,%s,%s,%s,%s,%s)',row)
+                for i in data.index:
+                    t = data.get_value(j,'Invoice Value')
+                    ivv = ivv+t
+                    print(ivv)
+                row=[id1,nc,sv,int(tcu),float(ipp)]
+                cur1.execute('INSERT INTO ipp_company (Company_ID,Name_of_Company,Services,Unit,IPP) VALUES (%s,%s,%s,%s,%s)',row)
                 mydb.commit()
                 
 
@@ -135,112 +136,7 @@ def reports():
 
 @app.route('/uploads', methods = ['GET','POST'])
 def uploads():
-    if request.method == 'POST':
-        if request.form['submit_button']=='edit':
-
-            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
-
-            print('database connected')
-
-            cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sampcomp.csv'))
-
-            for row in csv_data:
-                print(row)
-                cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Month,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
-                print(row)
-            mydb.commit()
-            cursor.close()
-
-
-            return redirect(request.url)
-        elif request.form['submit_button']=='edit1':
-
-            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
-
-            print('database connected')
-
-            cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/comp.csv'))
-            for row in csv_data:
-                print(row)
-                cursor.execute('INSERT INTO services_invoice (Sr_No,Name_of_Company,Company_ID,Month,Services,Model,Unit,Invoice_Value) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',row)
-                print(row)
-            mydb.commit()
-            cursor.close()
-
-
-            return redirect(request.url)
-        elif request.form['submit_button']=='edit2':
-
-            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
-
-            print('database connected')
-
-            cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/emp1.csv'))
-            print(csv_data)
-            for row in csv_data:
-                print(len(row))
-                cursor.execute('INSERT INTO employee_master (Sr_No,Prepared_By,Code,Emp_No,Name,Gender,Father_Name,DOB,DOJ,Paid_By,Cost_Centre,Employee_Name_On_Passbook,Bank_Name,Branch_Name,IFSC_Code,Beneficiary_Account_Number,Beneficiary_City,State,email_address,pay_days,total_days,location,Bank_State,CPI_eligibility,Designation,ODOJ,Level,Direct_Indirect,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Personal_Official_No,Company) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
-                print(row)
-            mydb.commit()
-            cursor.close()
-
-
-            return redirect(request.url)
-
-        # check if the post request has the file part
-        elif request.form['submit_button']=='Submit':
-            if 'file' not in request.files:
-
-                return redirect(request.url)
-            file = request.files['file']
-            if file.filename == '':
-                flash('No file selected for uploading')
-                return redirect(request.url)
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                flash('File successfully uploaded')
-                return redirect(request.url)
-            else:
-                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
-                return redirect(request.url)
-
-        elif request.form['submit_button']=='Submit1':
-            if 'file' not in request.files:
-
-                return redirect(request.url)
-            file = request.files['file']
-            if file.filename == '':
-                flash('No file selected for uploading')
-                return redirect(request.url)
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                flash('File successfully uploaded')
-                return redirect(request.url)
-            else:
-                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
-                return redirect(request.url)
-
-        elif request.form['submit_button']=='Submit2':
-            if 'file' not in request.files:
-
-                return redirect(request.url)
-            file = request.files['file']
-            if file.filename == '':
-                flash('No file selected for uploading')
-                return redirect(request.url)
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                flash('File successfully uploaded')
-                return redirect(request.url)
-            else:
-                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
-                return redirect(request.url)
+    return render_template('uploads.html')
 
 
 
@@ -388,15 +284,15 @@ def cpp():
             mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
             print('database connected')
             cursor=mydb.cursor()
-            cursor.execute("SELECT * FROM ipp_company")
+            cursor.execute("SELECT * FROM services_invoice")
             data3 = cursor.fetchall()
             print(data3)
-            data = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Months','Services','Unit','Invoice Value','IPP'])
+            data = pd.DataFrame(data3,columns=['Name_of_Company','Company_ID','Services','Unit','Invoice_Value'])
             cursor=mydb.cursor()
 
-            cursor.execute("SELECT * FROM employee_master ")
+            cursor.execute("SELECT * FROM employee_masters")
             data2=cursor.fetchall()
-            data1 = pd.DataFrame(data2,columns=['Sr_No','Prepared_By','Code','Emp_No','Name','Gender','Father_Name','DOB','DOJ','Paid_By','Cost_Centre','Employee_Name_On_Passbook','Bank_Name','Branch_Name','IFSC_Code','Beneficiary_Account_Number','Beneficiary_City','State','email_address','pay_days','total_days','location','Bank_State','CPI_eligibility','Designation','ODOJ','Level','Direct_Indirect','Reporting_1','Reporting_2','Reporting_3','Reporting_4','Reporting_5','Personal_Official_No','Company'])
+            data1 = pd.DataFrame(data2,columns=['Name','Emp_No','Level','Direct_Indirect','Reporting_1','Reporting_2','Reporting_3','Reporting_4','Reporting_5','Company'])
             print(data1['Level'])
             direct1 = 0
             direct2 = 0
@@ -421,21 +317,23 @@ def cpp():
             for i in data1.index:
                 a = data1.get_value(i,'Level')
                 b = data1.get_value(i,'Direct_Indirect')
-                if a == "1" and b == "Direct":
+                if a == "Direct1":
                     direct1 = direct1 + 1
-                elif a == "1" and b == "Indirect":
+                elif a == "Support1":
                     indirect1 = indirect1 + 1
-                elif a == "2" and b == "Direct":
+                elif a == "Direct2":
                     direct2 = direct2 + 1
-                elif a == "2" and b == "Indirect":
+                elif a == "Support2":
                     indirect2 = indirect2 + 1  
+                elif a == "Direct3":
+                    direct3 = direct3 + 1
             print(direct1)
             ivv = 0
             ivv18 = 0
             cpp = 0
             acparts = 0
             for i in data.index:
-                iv = data.get_value(i,'Invoice Value')
+                iv = data.get_value(i,'Invoice_Value')
                 ivv = ivv+iv
             ivv18 = (ivv)/1.18
             print(ivv18)
@@ -444,10 +342,12 @@ def cpp():
 
             d1 = direct1 * 2
             d2 = direct2 * 4
+            d3 = direct3 * 6
             id1 = indirect1 * 1
             id2 = indirect2 * 2
+            id3 = indirect3 * 3
 
-            final = d1+d2+id1+id2
+            final = d1+d2+id1+id2+id3+d3
             print(final)
 
             acparts = cpp/final
@@ -455,10 +355,10 @@ def cpp():
 
             pid1 = acparts * 2
             pid2 = acparts * 4
-            pid3 = acparts * 8
+            pid3 = acparts * 6
             piid1 = acparts * 1
             piid2 = acparts * 2
-            piid3 = acparts * 4
+            piid3 = acparts * 3
 
             print(pid1)
             print(pid2)
@@ -479,5 +379,246 @@ def cpp():
 
             print(td1+td2+tid1+tid2)
     return render_template('cpp.html',ivv=ivv,cpp=cpp,final=final,data1=data3,direct1=direct1,direct2=direct2,direct3=direct3,indirect1=indirect1,indirect2=indirect2,indirect3=indirect3,acparts=acparts,piid1=piid1,pid1=pid1,pid2=pid2,pid3=pid3,piid2=piid2,piid3=piid3,td1=td1,td2=td2,td3=td3,tid1=tid1,tid2=tid2,tid3=tid3)
+
+@app.route('/compupload',methods = ['GET','POST'])
+def compupload():
+    if request.method == 'POST':
+        if request.form['submit_button']=='edit':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sampcomp.csv'))
+
+            for row in csv_data:
+                print(row)
+                cursor.execute('INSERT INTO company_master_table (Sr_No,Name_of_Company,Company_ID,Month,Unit,Address,State,PinCode,Customer_Contact_Person,Customer_Contact_Number,Supervisor,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Closed_By,Services_A,Services_Model,Reputation_of_client,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                print(row)
+            mydb.commit()
+            cursor.close()
+            return render_template('compupload.html')
+        elif request.form['submit_button']=='Submit':
+            if 'file' not in request.files:
+
+                return redirect(request.url)
+            file = request.files['file']
+            if file.filename == '':
+                flash('No file selected for uploading')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('File successfully uploaded')
+                return redirect(request.url)
+            else:
+                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+                return redirect(request.url)
+        elif request.form['submit_button']=='delete':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            cursor.execute('TRUNCATE TABLE company_master_table')
+
+            mydb.commit()
+            cursor.close()
+            return render_template('compupload.html')
+    return render_template('compupload.html')
+
+@app.route('/empupload',methods = ['GET','POST'])
+def empupload():
+    if request.method == 'POST':
+        if request.form['submit_button']=='edit2':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/emp1.csv'))
+            print(csv_data)
+            for row in csv_data:
+                print(len(row))
+                cursor.execute('INSERT INTO employee_master (Sr_No,Prepared_By,Code,Emp_No,Name,Gender,Father_Name,DOB,DOJ,Paid_By,Cost_Centre,Employee_Name_On_Passbook,Bank_Name,Branch_Name,IFSC_Code,Beneficiary_Account_Number,Beneficiary_City,State,email_address,pay_days,total_days,location,Bank_State,CPI_eligibility,Designation,ODOJ,Level,Direct_Indirect,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Personal_Official_No,Company) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                print(row)
+            mydb.commit()
+            cursor.close()
+            return render_template('empupload.html')
+        elif request.form['submit_button']=='Submit2':
+            if 'file' not in request.files:
+
+                return redirect(request.url)
+            file = request.files['file']
+            if file.filename == '':
+                flash('No file selected for uploading')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('File successfully uploaded')
+                return redirect(request.url)
+            else:
+                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+                return redirect(request.url)
+        elif request.form['submit_button']=='delete':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            cursor.execute('TRUNCATE TABLE employee_master')
+
+            mydb.commit()
+            cursor.close()
+            return render_template('empupload.html')
+    return render_template('empupload.html')
+@app.route('/servicesupload',methods = ['GET','POST'])
+def serviceupload():
+    if request.method == 'POST':
+        if request.form['submit_button']=='edit1':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/services.csv'))
+            for row in csv_data:
+                print(row)
+                cursor.execute('INSERT INTO services_invoice (Name_of_Company,Company_ID,Services,Unit,Invoice_Value) VALUES (%s,%s,%s,%s,%s)',row)
+                print(row)
+            mydb.commit()
+            cursor.close()
+            return render_template('servicesupload.html')
+        elif request.form['submit_button']=='Submit1':
+            if 'file' not in request.files:
+
+                return redirect(request.url)
+            file = request.files['file']
+            if file.filename == '':
+                flash('No file selected for uploading')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('File successfully uploaded')
+                return redirect(request.url)
+            else:
+                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+                return redirect(request.url)
+        elif request.form['submit_button']=='delete':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            cursor.execute('TRUNCATE TABLE services_invoice')
+
+            mydb.commit()
+            cursor.close()
+            return render_template('servicesupload.html')
+    return render_template('servicesupload.html')
+@app.route('/empnew',methods = ['GET','POST'])
+def empnew():
+    if request.method == 'POST':
+        if request.form['submit_button']=='edit2':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/empnew.csv'))
+            print(csv_data)
+            for row in csv_data:
+                print(len(row))
+                cursor.execute('INSERT INTO employee_masters (Emp_No,Name,Level,Direct_Indirect,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Company) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                print(row)
+            mydb.commit()
+            cursor.close()
+            return render_template('empnew.html')
+        elif request.form['submit_button']=='Submit2':
+            if 'file' not in request.files:
+
+                return redirect(request.url)
+            file = request.files['file']
+            if file.filename == '':
+                flash('No file selected for uploading')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('File successfully uploaded')
+                return redirect(request.url)
+            else:
+                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+                return redirect(request.url)
+        elif request.form['submit_button']=='delete':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            cursor.execute('TRUNCATE TABLE employee_masters')
+
+            mydb.commit()
+            cursor.close()
+            return render_template('empnew.html')
+    return render_template('empnew.html')
+@app.route('/compnew',methods = ['GET','POST'])
+def compnew():
+    if request.method == 'POST':
+        if request.form['submit_button']=='edit':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sampcomp.csv'))
+
+            for row in csv_data:
+                print(row)
+                cursor.execute('INSERT INTO company_master (Name_of_Company,Company_ID,Supervisor,Services,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                print(row)
+            mydb.commit()
+            cursor.close()
+            return render_template('compnew.html')
+        elif request.form['submit_button']=='Submit':
+            if 'file' not in request.files:
+
+                return redirect(request.url)
+            file = request.files['file']
+            if file.filename == '':
+                flash('No file selected for uploading')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('File successfully uploaded')
+                return redirect(request.url)
+            else:
+                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+                return redirect(request.url)
+        elif request.form['submit_button']=='delete':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            cursor.execute('TRUNCATE TABLE company_master')
+
+            mydb.commit()
+            cursor.close()
+            return render_template('compnew.html')
+    return render_template('compnew.html')
 if __name__=='__main__':
     app.run(debug=True)
