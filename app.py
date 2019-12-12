@@ -9,6 +9,8 @@ import mysql.connector as ms
 from werkzeug.utils import secure_filename
 from flask import send_file
 import pandas as pd
+import mysql.connector
+
 UPLOAD_FOLDER = 'E:/PROJECT/ipp/uploads'
 app = Flask(__name__)
 
@@ -88,7 +90,7 @@ def reports():
             cursor1=mydb.cursor()
             cursor.execute("SELECT * FROM services_invoice")
             data3 = cursor.fetchall()
-            data = pd.DataFrame(data3,columns=['Sr.No','Name_of_Company','Company_ID','Services','Model','Unit','Invoice Value'])
+            data = pd.DataFrame(data3,columns=['Name_of_Company','Company_ID','Services','Unit','Invoice Value'])
             cursor1.execute("SELECT * FROM company_master")
             data2=cursor1.fetchall()
             data1 = pd.DataFrame(data2,columns=['Name_of_Company','Company_ID','Supervisor','Services','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
@@ -100,7 +102,7 @@ def reports():
                 wc = data1.get_value(i,'Working_Condition')
                 fc = data1.get_value(i,'Facilities')
                 others = data1.get_value(i,'others')
-                cuv = sc*acs*wc*fc*others
+                cuv = sc*acs*wc*fc
 
                 ac=1
                 ivv=0
@@ -247,10 +249,26 @@ def showReport():
             mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
             print('database connected')
             cursor=mydb.cursor()
-            cursor.execute("SELECT * FROM ipp_company")
+            cursor.execute("SELECT Company_ID,Name_of_Company,Services,Unit,IPP FROM ipp_company")
             data3 = cursor.fetchall()
             print(data3)
-            data = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Month','Services','Unit','Invoice_Value','IPP'])
+            data = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Services','Unit','IPP'])
+        elif request.form['submit_button']=='excel':
+            
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+            data1=""
+            data =['Company_ID','Name_of_Company','Unit','IPP']
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+
+            cursor.execute("SELECT Company_ID,Name_of_Company,Unit,IPP FROM ipp_company")
+            data1=cursor.fetchall()
+            df = pd.DataFrame(data1,columns=['Company_ID','Name_of_Company','Unit','IPP'])
+            df.to_csv('Final_ipp.csv',index=False)
+            path = "E:/PROJECT/ipp/Final_ipp.csv"
+            return send_file(path,mimetype='text/csv' ,attachment_filename='Final_ipp.csv',as_attachment=True)
     return render_template('showReport.html',data1=data3)
 
 @app.route('/cpp',methods = ['GET','POST'])
@@ -338,6 +356,7 @@ def cpp():
             ivv18 = (ivv)/1.18
             print(ivv18)
             cpp = (ivv18*1)/100
+            cpp = round(cpp)
             print(cpp)
 
             d1 = direct1 * 2
@@ -348,9 +367,11 @@ def cpp():
             id3 = indirect3 * 3
 
             final = d1+d2+id1+id2+id3+d3
+            final = round(final)
             print(final)
 
             acparts = cpp/final
+            acparts = round(acparts)
             print(acparts)
 
             pid1 = acparts * 2
@@ -371,6 +392,12 @@ def cpp():
             tid1 = piid1 * indirect1
             tid2 = piid2 * indirect2
             tid3 = piid3 * indirect3
+            td1 = round(td1)
+            td2 = round(td2)
+            td3 = round(td3)
+            tid1 = round(tid1)
+            tid2 = round(tid2)
+            tid3 = round(tid3)
 
             print(td1)
             print(td2)
@@ -390,6 +417,7 @@ def compupload():
             print('database connected')
 
             cursor=mydb.cursor()
+
             csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sampcomp.csv'))
 
             for row in csv_data:
@@ -582,7 +610,7 @@ def compnew():
             print('database connected')
 
             cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/sampcomp.csv'))
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/compnew.csv'))
 
             for row in csv_data:
                 print(row)

@@ -105,6 +105,8 @@
 
             <form method="POST">
                 <button class="btn btn-primary" name="submit_button" value="IPP">Report_for_IPP</button>
+                <button class="btn btn-primary" name="submit_button" value="excel">Download as Excel</button>
+
 
             </form>
             <div class="line"></div>
@@ -135,8 +137,8 @@
         <tr>
    <th scope="row">{{user[0]}}</th>
     <td> {{user[1]}} </td>
+      <td>{{user[3]}}</td>
       <td>{{user[4]}}</td>
-      <td>{{user[6]}}</td>
         </tr>
   {% endfor %}
     
