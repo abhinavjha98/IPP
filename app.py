@@ -93,7 +93,7 @@ def reports():
             data = pd.DataFrame(data3,columns=['Name_of_Company','Company_ID','Services','Unit','Invoice Value'])
             cursor1.execute("SELECT * FROM company_master")
             data2=cursor1.fetchall()
-            data1 = pd.DataFrame(data2,columns=['Name_of_Company','Company_ID','Supervisor','Services','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
+            data1 = pd.DataFrame(data2,columns=['Name_of_Company','Company_ID','Supervisor','Services','Model','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
             for i in data1.index:
                 id1 = data1.get_value(i,'Company_ID')
                 sc = data1.get_value(i,'Service_Charges')
@@ -102,7 +102,9 @@ def reports():
                 wc = data1.get_value(i,'Working_Condition')
                 fc = data1.get_value(i,'Facilities')
                 others = data1.get_value(i,'others')
-                cuv = sc*acs*wc*fc
+                model = data1.get_value(i,'Model')
+                cuv = sc*acs*wc*fc*others
+                print(cuv)
 
                 ac=1
                 ivv=0
@@ -121,15 +123,19 @@ def reports():
                         ac = unit
                         tcu=a+ac
                         a=tcu
-                print(ivv)
-                ipp = (tcu/30)*cuv
+
+                tcu = round(tcu/30)
+                ipp = tcu*cuv
                 ipp = ipp*7
+                if model == "OP":
+                    ipp = ipp/2
+                    print("hello")
                 cur1 = mydb.cursor()
                 for i in data.index:
                     t = data.get_value(j,'Invoice Value')
                     ivv = ivv+t
-                    print(ivv)
-                row=[id1,nc,sv,int(tcu),float(ipp)]
+                
+                row=[id1,nc,sv,int(a),round(float(ipp))]
                 cur1.execute('INSERT INTO ipp_company (Company_ID,Name_of_Company,Services,Unit,IPP) VALUES (%s,%s,%s,%s,%s)',row)
                 mydb.commit()
                 
@@ -253,6 +259,7 @@ def showReport():
             data3 = cursor.fetchall()
             print(data3)
             data = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Services','Unit','IPP'])
+            return render_template('showReport.html')
         elif request.form['submit_button']=='excel':
             
             mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
@@ -269,6 +276,75 @@ def showReport():
             df.to_csv('Final_ipp.csv',index=False)
             path = "E:/PROJECT/ipp/Final_ipp.csv"
             return send_file(path,mimetype='text/csv' ,attachment_filename='Final_ipp.csv',as_attachment=True)
+        elif request.form['submit_button']=='GIPP':
+            print("hello")
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+            cursor=mydb.cursor()
+            cursor1=mydb.cursor()
+            cursor.execute("SELECT * FROM services_invoice")
+            data4 = cursor.fetchall()
+            data = pd.DataFrame(data4,columns=['Name_of_Company','Company_ID','Services','Unit','Invoice Value'])
+            cursor1.execute("SELECT * FROM company_master")
+            data2=cursor1.fetchall()
+            data1 = pd.DataFrame(data2,columns=['Name_of_Company','Company_ID','Supervisor','Services','Model','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
+            for i in data1.index:
+                id1 = data1.get_value(i,'Company_ID')
+                sc = data1.get_value(i,'Service_Charges')
+                acs = data1.get_value(i,'Actual_Stipend')
+                nc = data1.get_value(i,'Name_of_Company')
+                wc = data1.get_value(i,'Working_Condition')
+                fc = data1.get_value(i,'Facilities')
+                others = data1.get_value(i,'others')
+                model = data1.get_value(i,'Model')
+                cuv = sc*acs*wc*fc*others
+                print(cuv)
+
+                ac=1
+                ivv=0
+                tvv=0
+                tc=1
+                t=0
+                a=0
+                tcu=0
+                for j in data.index:
+                    id2 = data.get_value(j,'Company_ID')
+                   
+                    sv = data.get_value(j,'Services')
+                    iv = data.get_value(j,'Invoice Value')
+                    unit = data.get_value(j,'Unit')
+                    if id1 == id2:
+                        ac = unit
+                        tcu=a+ac
+                        a=tcu
+
+                tcu = round(tcu/30)
+                ipp = tcu*cuv
+                ipp = ipp*7
+                if model == "OP":
+                    ipp = ipp/2
+                    print("hello")
+                cur1 = mydb.cursor()
+                for i in data.index:
+                    t = data.get_value(j,'Invoice Value')
+                    ivv = ivv+t
+                
+                row=[id1,nc,sv,int(a),round(float(ipp))]
+                cur1.execute('INSERT INTO ipp_company (Company_ID,Name_of_Company,Services,Unit,IPP) VALUES (%s,%s,%s,%s,%s)',row)
+                mydb.commit()
+
+        elif request.form['submit_button']=='delete':
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            cursor.execute('TRUNCATE TABLE ipp_company')
+
+            mydb.commit()
+            cursor.close()
+            return render_template('showReport.html')
+
+                
     return render_template('showReport.html',data1=data3)
 
 @app.route('/cpp',methods = ['GET','POST'])
@@ -514,8 +590,7 @@ def serviceupload():
 
             print('database connected')
 
-            cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/services.csv'))
+            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/'+filename))
             for row in csv_data:
                 print(row)
                 cursor.execute('INSERT INTO services_invoice (Name_of_Company,Company_ID,Services,Unit,Invoice_Value) VALUES (%s,%s,%s,%s,%s)',row)
@@ -532,7 +607,20 @@ def serviceupload():
                 flash('No file selected for uploading')
                 return redirect(request.url)
             if file and allowed_file(file.filename):
+
                 filename = secure_filename(file.filename)
+                mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+                print('database connected')
+
+                csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/'+filename))
+                cursor=mydb.cursor()
+                for row in csv_data:
+                    print(row)
+                    cursor.execute('INSERT INTO services_invoice (Name_of_Company,Company_ID,Services,Unit,Invoice_Value) VALUES (%s,%s,%s,%s,%s)',row)
+                    print(row)
+                mydb.commit()
+                cursor.close()
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 flash('File successfully uploaded')
                 return redirect(request.url)
@@ -614,7 +702,7 @@ def compnew():
 
             for row in csv_data:
                 print(row)
-                cursor.execute('INSERT INTO company_master (Name_of_Company,Company_ID,Supervisor,Services,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                cursor.execute('INSERT INTO company_master (Name_of_Company,Company_ID,Supervisor,Services,Model,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
                 print(row)
             mydb.commit()
             cursor.close()
