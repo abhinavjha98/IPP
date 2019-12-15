@@ -584,21 +584,7 @@ def empupload():
 @app.route('/servicesupload',methods = ['GET','POST'])
 def serviceupload():
     if request.method == 'POST':
-        if request.form['submit_button']=='edit1':
-
-            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
-
-            print('database connected')
-
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/'+filename))
-            for row in csv_data:
-                print(row)
-                cursor.execute('INSERT INTO services_invoice (Name_of_Company,Company_ID,Services,Unit,Invoice_Value) VALUES (%s,%s,%s,%s,%s)',row)
-                print(row)
-            mydb.commit()
-            cursor.close()
-            return render_template('servicesupload.html')
-        elif request.form['submit_button']=='Submit1':
+        if request.form['submit_button']=='Submit1':
             if 'file' not in request.files:
 
                 return redirect(request.url)
@@ -643,23 +629,8 @@ def serviceupload():
 @app.route('/empnew',methods = ['GET','POST'])
 def empnew():
     if request.method == 'POST':
-        if request.form['submit_button']=='edit2':
-
-            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
-
-            print('database connected')
-
-            cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/empnew.csv'))
-            print(csv_data)
-            for row in csv_data:
-                print(len(row))
-                cursor.execute('INSERT INTO employee_masters (Emp_No,Name,Level,Direct_Indirect,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Company) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
-                print(row)
-            mydb.commit()
-            cursor.close()
-            return render_template('empnew.html')
-        elif request.form['submit_button']=='Submit2':
+        
+        if request.form['submit_button']=='Submit2':
             if 'file' not in request.files:
 
                 return redirect(request.url)
@@ -669,6 +640,19 @@ def empnew():
                 return redirect(request.url)
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
+                mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+                print('database connected')
+
+                cursor=mydb.cursor()
+                csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/'+filename))
+                print(csv_data)
+                for row in csv_data:
+                    print(len(row))
+                    cursor.execute('INSERT INTO employee_masters (Emp_No,Name,Level,Direct_Indirect,Reporting_1,Reporting_2,Reporting_3,Reporting_4,Reporting_5,Company) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                    print(row)
+                mydb.commit()
+                cursor.close()
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 flash('File successfully uploaded')
                 return redirect(request.url)
@@ -691,23 +675,8 @@ def empnew():
 @app.route('/compnew',methods = ['GET','POST'])
 def compnew():
     if request.method == 'POST':
-        if request.form['submit_button']=='edit':
-
-            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
-
-            print('database connected')
-
-            cursor=mydb.cursor()
-            csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/compnew.csv'))
-
-            for row in csv_data:
-                print(row)
-                cursor.execute('INSERT INTO company_master (Name_of_Company,Company_ID,Supervisor,Services,Model,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
-                print(row)
-            mydb.commit()
-            cursor.close()
-            return render_template('compnew.html')
-        elif request.form['submit_button']=='Submit':
+    
+        if request.form['submit_button']=='Submit':
             if 'file' not in request.files:
 
                 return redirect(request.url)
@@ -717,6 +686,19 @@ def compnew():
                 return redirect(request.url)
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
+                mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+                print('database connected')
+
+                cursor=mydb.cursor()
+                csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/'+filename))
+
+                for row in csv_data:
+                    print(row)
+                    cursor.execute('INSERT INTO company_master (Name_of_Company,Company_ID,Supervisor,Services,Model,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                    print(row)
+                mydb.commit()
+                cursor.close()
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 flash('File successfully uploaded')
                 return redirect(request.url)
@@ -736,5 +718,68 @@ def compnew():
             cursor.close()
             return render_template('compnew.html')
     return render_template('compnew.html')
+
+
+@app.route('/search',methods = ['GET','POST'])
+def search():
+    data3=""
+    d = ""
+    if request.method == 'POST':
+        if request.form['submit_button']=='submit':
+            option = request.form['options']
+            if option == "option1":
+                empcompid = request.form['empcompid']
+                mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+                cursor=mydb.cursor()
+
+                cursor.execute('SELECT * from employee_masters WHERE Emp_No = %s',(empcompid,))
+                data3 = cursor.fetchall()
+                print(data3)
+                d="e"
+                mydb.commit()
+                cursor.close()
+                return render_template('search.html',data3=data3,d="Employee table")
+            elif option == "option2":
+                empcompid = request.form['empcompid']
+                mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+                cursor=mydb.cursor()
+
+                cursor.execute('SELECT * from company_master WHERE Company_ID = %s',(empcompid,))
+                data4 = cursor.fetchall()
+                print(data4)
+                d="c"
+                mydb.commit()
+                cursor.close()
+                return render_template('search.html',data4=data4,d="Company table")
+            elif option == "option3":
+                empcompid = request.form['empcompid']
+                mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+                cursor=mydb.cursor()
+
+                cursor.execute('SELECT * from services_invoice WHERE Company_ID = %s',(empcompid,))
+                data5 = cursor.fetchall()
+                print(data5)
+                d="c"
+                mydb.commit()
+                cursor.close()
+                return render_template('search.html',data5=data5,d="Services")
+            print(d)
+        elif request.form['submit_button']=='edit':
+                option = request.form['idd']
+                if option == "Employee table":
+
+                elif option == "Company table":
+                    compid = request.form['empcompid']
+                    compname = request.form['empcompname']
+                    compunit = request.form['empcompunit']
+                    compinvoice = request.form['empcompinvoice']
+                    mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+                    cursor=mydb.cursor()
+
+                elif option == "Services":
+
+
+    return render_template('search.html')
+
 if __name__=='__main__':
     app.run(debug=True)

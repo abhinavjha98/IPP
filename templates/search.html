@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>IPP</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='style2.css')}}">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+       <nav id="sidebar" style="background-color: #007bff;">
+            <div class="sidebar-header" style="background-color: #dc3545">
+                <h3><a href="{{url_for('index')}}">IPP</a></h3>
+            </div>
+
+            <ul class="list-unstyled components">
+            <li>
+                    <a href="{{ url_for('comp') }}">Company Management</a>
+                </li>
+                <li>
+                    <a href="#">Service Management</a>
+                </li>
+                <li>
+                    <a href="#">Department Management</a>
+                </li>
+                <li>
+                    <a href="#">Employee Management</a>
+                </li>
+                <li>
+                    <a href="{{url_for('dod')}}">DoD Setup</a>
+                </li>
+
+                <li>
+                    <a href="#">User Role</a>
+                </li>
+        <li>
+                    <a href="{{url_for('showReport')}}">IPP Report</a>
+                </li>
+                <li>
+                    <a href="{{url_for('cpp')}}">CPP Report</a>
+                </li>
+                <li>
+                    <a href="#">Historical Data</a>
+                </li>
+                <li>
+                    <a href="{{url_for('uploads')}}">Data Uploads</a>
+                </li>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="{{url_for('login')}}" class="download" style="background-color: #fafafa;">Login</a>
+                </li>
+                <li>
+                    <a href="{{url_for('login')}}" class="article" style="background-color: ;">Register</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="line"></div>
+<div class="row">
+
+<div class="col-md-10">
+  <form method="post" enctype="multipart/form-data">
+    <div class="form-row align-items-center">
+                <div class="form-group mb-2 col-3">
+                  <label for="exampleInputEmail1">Choose table name</label>
+                </div>
+              <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="options" id="inlineRadio1" value="option1">
+  <label class="form-check-label" for="inlineRadio1">Employee master</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="options" id="inlineRadio2" value="option2">
+  <label class="form-check-label" for="inlineRadio2">Company master</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="options" id="inlineRadio3" value="option3" >
+  <label class="form-check-label" for="inlineRadio3">Services and Units </label>
+
+</div>
+</div>
+
+   <div class="form-row align-items-center">
+                <div class="orm-group mb-2 col-3">
+                  <label for="exampleInputEmail1">Enter id</label>
+                </div>
+              <div class="form-group col-5 ">
+                  <input type="name" name="empcompid" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+              </div>
+          </div>
+      
+    <br>
+  <button type="submit" name="submit_button" value="submit" class="btn btn-primary mb-2 btn-danger">Click to get columns</button>
+
+  </form>
+  <div class="line">
+      
+  </div>
+  <form method="post" enctype="multipart/form-data">
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="idd" id="exampleRadios1" value="{{d}}" checked>
+  <label class="form-check-label" for="exampleRadios1">
+    {{d}}
+  </label>
+</div>
+
+ {% for user in data5 %}
+   <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Id</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[1]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Company name</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompname" class="form-control" value="{{user[0]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Unit</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompunit" class="form-control" value="{{user[3]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Invoice Value</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompinvoice" class="form-control" value="{{user[4]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+
+ 
+  {% endfor %}
+
+{% for user in data4 %}
+   <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Id</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[1]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Company name</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[0]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Supervisor</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[2]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Services</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[3]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Model</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[4]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Services Charge</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[5]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Actual Stipend</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[6]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Working Condition</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[7]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Facilities</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[8]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Others</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[9]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+
+ 
+  {% endfor %}
+  {% for user in data3 %}
+   <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Id</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[0]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Employee name</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[1]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Company name</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[9]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Level</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[2]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Direct/Indirect</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[3]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Reporting 1</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[4]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Reporting 2</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[5]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Reporting 3</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[6]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Reporting 4</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[7]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+    <div class="form-row align-items-center">
+        <div class="orm-group mb-2 col-3">
+             <label for="exampleInputEmail1">Reporting 5</label>
+        </div>
+        <div class="form-group col-5 ">
+        <input type="name" name="empcompid" class="form-control" value="{{user[8]}}" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter employee id or company id">
+        </div>
+    </div>
+
+ 
+  {% endfor %}
+  <br>
+  <button type="submit" name="submit_button" value="edit" class="btn btn-primary mb-2 btn-danger">Click to update data</button>
+</form>
+
+<form method="post" enctype="multipart/form-data">
+      {% for user in data3 %}
+    <div class="form-row align-items-center">
+                <div class="form-group mb-2 col-3">
+                  <label for="exampleInputEmail1"></label>
+                </div>
+              <div class="form-group mx-sm-3 mb-2 col-4">
+                  <input type="name" name="transport_canteen_facility" value=""class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter transport and Canteen facility">
+              </div>
+       {% endfor %}       
+</form>
+</div>
+</div>
+
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+        $(function(){
+    $(".makeEditable").click(function(){
+        $('input:text').removeAttr("readonly");
+    });
+
+    $(".makeNonEditable").click(function(){
+        $('input:text').attr("readonly", "readonly");
+    });
+});
+    </script>
+</body>
+
+</html>
