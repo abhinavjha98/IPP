@@ -1,234 +1,351 @@
 Company_ID,Name_of_Company,Unit,IPP
-Gabriel EL,Gabriel India Limited,50,47
-Mate,Mothersons Automotive Tec,1559,819
-Aptiv EL,Aptiv Components India Pv,309,158
-3M,3M India Ltd,1377,483
-ARAI,Automotive Resarch Associ,2093,735
-BFL EL,BHARAT FORGE LTD,444,354
-Clover,Clover Forging & Machinin,85,47
-Encube,Encube Ethicals Pvt Ltd,252,84
-Harman,Harman International Indi,2709,945
-Hyundai EL,Hyundai Construction Equi,113,94
-MSSL,Mahindra Sanyo Special St,863,152
-Mars,Mars International India ,419,49
-Menon EL,Menon & Menon Limited,450,532
-Menon Kagal EL,Menon & Menon Limited.,52,71
-Menon Piston EL,Menon Pistons Ltd,118,94
-MFL,Metalyst Forging Ltd,179,213
-P3W Vehicle,Piaggio Vehicles Private ,5421,1900
-P2W,Piaggio Vehicles Pvt Ltd,913,315
-Pentair,Pentair Valves And Contro,179,142
-Sulzer EL,Sulzer India Pvt Ltd,213,165
-Taparia,Taparia Tools Ltd,5830,4583
-Valeo,Valeo India Pvt Ltd,8255,4331
-Emerson,Emerson Process Managemen,1653,1299
-Advik,ADVIK HI-TECH PVT LTD,4122,2158
-Brakes,Brakes India Pvt Ltd,1633,850
-Impress,IMPRESS CONTAINERS COMPAN,363,189
-Fristam Pumps,FRISTAM PUMPS (I) PVT. LT,117,63
-Gabriel NEEM,Gabriel India Limited.,926,488
-Gabriel NEEM Main Plant,Gabriel India Limited -,588,315
-Kingfa,Kingfa Science & Technolo,503,268
-Leoni Cables,LEONI Cable Solutions (In,977,520
-Leoni Wiring,LEONI Wiring Systems (Pun,753,394
-Lumiere,Lumiere Coolants Ltd,889,315
-MMM NEEM,Magneti Marelli Motherson,1455,1158
-Supreme,Supreme Treon Pvt Ltd,539,425
-Persistent,Persistent System Ltd,93,10
-3M Banglore,3M India Limited.,1067,378
-3M Pimpri,3M Electro & Communicatio,776,273
-Aakar,Aakar Foundry Pvt Ltd,1544,536
-Aditya Auto Bommasandra,ADITYA AUTO PRODUCTS & EN,268,142
-Aeques Automotive,AEQUS AUTOMOTIVE PVT LTD,31,10
-Aeques Engg Plastic,AEQUS ENGINEERED PLASTICS,4810,1680
-Aeques II,AEQUS PVT LTD II,1427,504
-Aeques SEZ 1,Aequs SEZ Private Limited,463,158
-Aequs Force,Aequs Force Consumers Pro,1001,346
-Aerostructures I,AeroStructures Manufactur,1632,567
-Aerospace Processing,Aerospace Processing Indi,572,200
-Aisin,AISIN AUTOMOTIVE KARNATAK,1659,578
-Allevard,ALLEVARD-IAI Suspension P,318,173
-Autoliv Haryana,Autoliv India Private Lim,1474,514
-Autoliv Banglore,Autoliv India Pvt Ltd,1621,378
-Auma,AUMA India Private Limite,808,189
-Armacell,Armacell India Pvt Ltd,734,567
-At India,At India Auto Parts Priva,3729,868
-Badve Auto Gujrat,BADVE AUTO TECH PVT LTD,3153,1654
-Badve Engg NEEM,Badve Engineering Limited,1636,1949
-Badve Engg Pirangut,Badve Engineering Ltd -,3795,4465
-Badve Engg 16,Badve Engineering Ltd - X,391,205
-Badve 3K Aurangabad,BADVE AUTOCOMPS PVT.LTD 3,886,709
-Bayforge,BAYFORGE PRIVATE LIMITED,1319,154
-Bilz Tool,Bilz Tool Private Limited,269,94
-Bharat Forge Baramati,Bharat Forge Limited,2003,1055
-BFL Pune NEEM,BHARAT FORGE LTD.,8294,4347
-Bosch Banglore,Bosch Automotive Electron,4303,1001
-Bosch Adugudi & Bidadi,Bosch Limited,7791,910
-Bosch Pune,Bosch Chassis System Indi,30,4
-Bhavani,Bhavani Industries,71,14
-Brainbees,Brainbees Solutions Pvt L,682,362
-Cargill.,Cargill India Pvt Ltd,204,74
-Ceratizit,Ceratizit Bengaluru Priva,477,112
-Cogeme,Cogeme Precision Parts (I,5211,1827
-Cooper,Cooper Standard Automotiv,361,425
-Cooper Satara,Cooper Corporation Pvt Lt,2834,987
-Datacorp Banglore,DataCorp Traffic Private ,3162,735
-Datacorp Gurgaon,DATACORP TRAFFIC PRIVATE ,1748,406
-Datacorp Madurai,Datacorp Traffic Private ,1616,189
-Digital Age,Digital Age Retail Pvt Lt,71,32
-DRI India,DRI India Relays Private ,466,112
-Delfingen,Delfingen India Pvt Ltd,972,336
-Durovalves,Durovalves India Pvt Ltd,3917,2063
-Dynamatic Aerospace,Dynamatic Technologies Li,2424,850
-Eximius Infratech,Eximius Infra Tech Soluti,367,189
-Fairfield,Fairfield Atlas Limited,2902,2292
-Fenace Auto,Fenace Auto Limited,422,496
-Garware Wai,Garware Technical Fibres ,1834,2162
-Grupo,Grupo Antolin India Priva,489,378
-Hager Plant 2,Hager Electro Private Lim,3968,1386
-Herman Miller,Herman Miller Furniture (,469,112
-Walvoil,WALVOIL FLUID POWER INDIA,1815,420
-Hical EC3,Hical Technologies Pvt. L,304,105
-Hyundai Steel,HYUNDAI STEEL PIPE INDIA ,4830,564
-IFB,IFB Industrial Ltd,5661,1323
-Indiana,Indiana Gratings Pvt Ltd,2286,798
-India Kawasaki,India Kawasaki Motors Pvt,262,213
-Indo Honga,Indo Schottle Auto Parts ,0,0
-ITC,ITC Food Limited,1642,578
-Jabil,Jabil Circuit India Pvt L,9535,2226
-Jayshree Electron,Jayshree Electron Pvt Ltd,951,756
-Jayshree Eletrodevices,Jayashree Electro Devices,266,213
-Jayshree Encoders,Jayashree Encoders Pvt Lt,440,354
-JK Precision,JK Precision And Tools,312,105
-Kern Lieber,Kern-Liebers( India) Pvt ,2657,1402
-Kemwell,Kemwell Biopharm Pvt Ltd,343,77
-KFIL NEEM,Kirloskar Ferrous Industr,4105,2158
-Kosei Minda,Kosei Minda Alumiun Compa,33,10
-Konecranes,Konecranes and Demag Priv,933,732
-KSPG,KSPG Automotive India Pvt,1806,945
-KSPG Supa,KSPG Automotive India Pri,120,63
-Lumax Kolar,Lumax Auto Technologies L,4461,2347
-Lumax Bidadi,Lumax Industries Ltd,2025,1071
-MHL Urse NEEM,MAHINDRA CIE Automotive L,5895,2058
-Mahindra Gear,Mahindra CIE Automotive L,1988,1040
-Magellan,Magellan Aerospace (India,60,14
-Maxion,Maxion Wheels Aluminum In,3261,1144
-Menon NEEM,Menon & Menon Limited -,3992,4713
-Menon Kagal NEEM,Menon & Menon Limited..,1300,1524
-Minda Hosur,Minda Industries Ltd,4529,2378
-Minda Lighting,Minda Industries Ltd (Lig,2162,2552
-Minda Switch Div,Minda Industries Ltd (Swi,2112,2481
-Minda Sensor 2,Minda Industries Ltd (Sen,1295,1524
-Minda Chennai,MINDA INDUSTRIES LTD (LIG,1192,630
-Mitsuba,Mitsuba Sical India Priva,1428,756
-MINDA KATOOLEC,MINDA KATOOLEC ELECTRONIC,1393,724
-Minda Kyoraku,MINDA KYORAKU LIMITED,323,260
-Mutual Shikrapur,MUTUAL AUTOMOTIVE PRIVATE,914,709
-Schneider Chennai,M/S. Schneider Electric I,6732,1568
-Metro Cash DC 26,Metro Cash and Carry Indi,3037,707
-Metro Cash DC 28,METRO Cash & Carry India ,349,42
-Mivin Engg,Mivin Engg Technologies P,607,140
-Nipro,Nipro India Corporation P,12233,4284
-Nipro Pharma,Nipro Pharma Packaging In,2083,724
-Norma,Norma Group Products Indi,702,362
-Nexteer,Nexteer Automotive India ,720,252
-Ohsung,Ohsung Electronics India ,2065,1087
-Otto Bilz,Otto Bilz India Pvt Ltd,130,42
-Owari,Owari Precision Products ,1644,385
-Premium,Premium Transmission Limi,2443,1914
-Precision Plastic,Precision Plastic Enginee,318,173
-PPG,PPG ASIAN PAINTS PRIVATE ,1463,514
-Paras,Paras Power Engineering P,421,496
-Plansee,Plansee India High Perfor,564,133
-Rao Nursing,Rao Nursing Home,740,262
-R Vision,R-Vision Plastic Industri,31,24
-Recipharma,Recipharm Pharmaservices ,1262,441
-Renata Karandi,RENATA PRECISION COMPONEN,3195,1124
-Renata Sector 7,Renata Precision Componen,438,158
-Rinder Chakan,RINDER INDIA PVT. LTD.,672,780
-Minda Rinder Hosur,Minda Rinder Private Limi,2206,2622
-Rokiminda,ROKIMINDA CO PRIVATE LTD,2128,746
-San & San,San and San Auto Private ,311,354
-Selec Control,Selec Control Pvt Ltd,1169,410
-Selec EL 67,Selec Control Pvt Ltd.,1027,357
-SFO,SFO Technologies Pvt Ltd,153,35
-Schneider Hyderabad,Schneider Electric India ,9494,7466
-Schneider Banglore,Schneider Electric IT Bus,4039,945
-Schneider Vadodara,Schneider Electric Infras,29,4
-Schneider SEPFC,Schneider Electric SEPFC,6174,1442
-Schneider President,SCHNEIDER ELECTRIC PRESID,1467,343
-Shivam,Shivam Autotech Ltd,637,496
-Shubhra,Shubhra Plastics Private ,1218,969
-Stanley Lifestyle,Stanley Lifestyles Limite,1078,378
-Stanley Sofas,STANLEY OEM SOFAS LTD,942,163
-Stanzen,Stanzen Engineering Pvt L,1571,364
-Sulzer NEEM,Sulzer India Pvt. Ltd.,124,63
-Schmetz,Schmetz India Private Lim,515,119
-Seltech,SELTECH SALES & SERVICES,2407,1260
-Senapathy,Senapathy Whiteley Pvt Lt,1332,308
-Shirodkar,SHIRODKAR PRECI COMP PVT ,270,213
-Sujan,Sujan Cooper Standard AVS,582,673
-Saehan Stamping,Saehan Stamping Private L,3353,1764
-Tata Hitachi,Tata Hitachi Construction,2900,679
-Thyssenkrupp,Thyssenkrupp Elevator (In,581,200
-TMEIC PE Unit,TMEIC INDUSTRIAL SYSTEMS ,2813,658
-TMEIC RM Unit,TMEIC Industrial Systems ,7778,1813
-Tokai Rika,Tokai Rika Minda India Pv,6014,1400
-Toyota Boshoku,Toyota Boshoku Automotive,9039,2107
-Toyota Engine,Toyota Industries Engine ,8521,1988
-Toyota Boshoku Hosur,TOYOTA BOSHOKU AUTOMOTIVE,1004,231
-Toyoda Gosei,TOYODA GOSEI SOUTH INDIA ,2492,581
-Toyotetsu,Toyotetsu India Private L,3128,728
-Unibic,Unibic Foods India Privat,543,284
-VEPL_V,Varroc Engineering Pvt Lt,2910,1528
-Varroc Chennai,Varroc Engineering Pvt. L,319,173
-VPPL II,Varroc Polymers Pvt Ltd -,2539,1339
-Varsa Plastic,Varsa Plastic Industries ,1580,1252
-Varroc AMD,Varroc Engineering Ltd - ,356,189
-VEPL I,Varroc Engineering Ltd Pl,2813,1480
-VEPL II,Varroc Engineering Ltd Un,3808,1334
-Varroc Chakan,Varroc Polymers Pvt Ltd (,145,79
-Visteon,Visteon Electronics India,3379,396
-Wipro,Wipro Kawasaki Precision ,1704,399
-Western Heat Bhosari,Western Heat And Forge Pv,103,106
-Yagachi,Yagachi Technologies Pvt ,2568,903
-Yuken Malur,Yuken India Limited,1131,266
-Yash Precision,Yash Precision Plastics P,107,63
-Zamil Steel,Zamil Steel Buildings Ind,638,496
-LG,LG Electronics India Pvt ,9494,3318
-Haier,Haier Appliance India Pvt,2260,1181
-Alf Engg,ALF Engineering P Ltd,73,32
-ABB INDIA-Mysore,ABB INDIA LIMITED,198,74
-Atomberg,Atomberg Technologies Pvt,1281,677
-Arka Anand,Arka Anand Automation,62,32
-Britannia,Britannia Industries Limi,224,49
-Cataler India,Cataler India Auto Parts ,177,42
-Carlberg,Carlsberg India Pvt. Ltd.,292,70
-Carraro,CARRARO INDIA PVT LTD,432,147
-Connectwell,Connectwell Industries Pv,2095,1102
-Cummins HHP,Cummnins HHP,282,63
-Cummins PGBU,Cummins India Limited -SE,508,119
-Cummins PHP,Cummins technologies Ind ,1141,266
-Cummins IPDC,Cummins India Limited ,1642,385
-Cummins Recon,Cummins Technologies Indi,214,49
-Duroshox,Duroshox Pvt Ltd,42,35
-Fleetguard,Fleetguard Filters Privat,2092,490
-Gestamp,Gestamp automotive India ,582,449
-Interflex,Interflex Electronics Ind,664,154
-ITC Kolkata,ITC Limited,520,268
-ITC Uluberia,ITC FOOD PVT LTD .,1044,551
-Mercedes,Mercedes Benz,360,42
-Moldtek,Moldtek Packaging Ltd,9,0
-Neosym,Neosym Industry Ltd,3488,1827
-Posco,POSCO Maharashtra Steel P,48,21
-Rsthal,R.STAHL PRIVATE LIMITED,324,173
-Rajiv Plastic,Rajiv Plastics Pvt Ltd,174,94
-Remsons Daman,Remsons Industries Ltd.,874,1028
-Remsons Gurgaon,Remsons Industries Ltd,5420,6414
-Sakhti Gear Unit 2,Sakthi Gear Products (Uni,158,177
-Slidewell Nashik,Slidewell Meilleur Tech P,85,71
-Cummins TCL3,Tata Cummins Private Limi,833,196
-Weir Mineral,WEIR MINERALS (INDIA) PRI,729,84
-Wheels India,Wheels India Ltd,118,63
-Badve CTPL,Badve Engineering Ltd CTP,0,0
-Badve APPL,Badve Engineering Ltd APP,0,0
+Gabriel EL,Gabriel India Limited,50,47.0
+Mate,Mothersons Automotive Tec,1559,819.0
+Aptiv EL,Aptiv Components India Pv,309,158.0
+3M,3M India Ltd,1377,483.0
+ARAI,Automotive Resarch Associ,2093,735.0
+BFL EL,BHARAT FORGE LTD,444,354.0
+Clover,Clover Forging & Machinin,85,47.0
+Encube,Encube Ethicals Pvt Ltd,252,84.0
+Harman,Harman International Indi,2709,945.0
+Hyundai EL,Hyundai Construction Equi,113,94.0
+MSSL,Mahindra Sanyo Special St,863,152.0
+Mars,Mars International India ,419,49.0
+Menon EL,Menon & Menon Limited,450,532.0
+Menon Kagal EL,Menon & Menon Limited.,52,71.0
+Menon Piston EL,Menon Pistons Ltd,118,94.0
+MFL,Metalyst Forging Ltd,179,213.0
+P3W Vehicle,Piaggio Vehicles Private ,5421,1900.0
+P2W,Piaggio Vehicles Pvt Ltd,913,315.0
+Pentair,Pentair Valves And Contro,179,142.0
+Sulzer EL,Sulzer India Pvt Ltd,213,165.0
+Taparia,Taparia Tools Ltd,5830,4583.0
+Valeo,Valeo India Pvt Ltd,8255,4331.0
+Emerson,Emerson Process Managemen,1653,1299.0
+Advik,ADVIK HI-TECH PVT LTD,4122,2158.0
+Brakes,Brakes India Pvt Ltd,1633,850.0
+Aptiv NEEM,Aptiv Components India Pv,3797,2000.0
+Impress,IMPRESS CONTAINERS COMPAN,363,189.0
+Fristam Pumps,FRISTAM PUMPS (I) PVT. LT,117,63.0
+Gabriel NEEM,Gabriel India Limited.,926,488.0
+Gabriel NEEM Main Plant,Gabriel India Limited -,588,315.0
+Kingfa,Kingfa Science & Technolo,503,268.0
+Kingfa Chakan,Kingfa Science & Technolo,942,488.0
+Leoni Cables,LEONI Cable Solutions (In,977,520.0
+Leoni Wiring,LEONI Wiring Systems (Pun,753,394.0
+Lumiere,Lumiere Coolants Ltd,889,315.0
+MMM NEEM,Magneti Marelli Motherson,1455,1158.0
+Supreme,Supreme Treon Pvt Ltd,539,425.0
+Persistent,Persistent System Ltd,93,10.0
+3M Banglore,3M India Limited.,1067,378.0
+3M Pimpri,3M Electro & Communicatio,776,273.0
+Aakar,Aakar Foundry Pvt Ltd,1544,357.0
+Aditya Auto Bommasandra,ADITYA AUTO PRODUCTS & EN,268,142.0
+Aeques Automotive,AEQUS AUTOMOTIVE PVT LTD,31,10.0
+Aeques Engg Plastic,AEQUS ENGINEERED PLASTICS,4810,1680.0
+Aeques II,AEQUS PVT LTD II,1427,504.0
+Aeques SEZ 1,Aequs SEZ Private Limited,463,158.0
+Aeques SEZ 2,Aequs SEZ Private Limited,0,0.0
+Aequs Force,Aequs Force Consumers Pro,1001,346.0
+Aerostructures I,AeroStructures Manufactur,1632,567.0
+Aerostructures II,AeroStructures Manufactur,1247,441.0
+Aerospace Processing,Aerospace Processing Indi,572,200.0
+Aisin,AISIN AUTOMOTIVE KARNATAK,1659,578.0
+Allevard,ALLEVARD-IAI Suspension P,318,173.0
+Autoliv Haryana,Autoliv India Private Lim,1474,514.0
+Autoliv Banglore,Autoliv India Pvt Ltd,1621,378.0
+Auma,AUMA India Private Limite,808,189.0
+Armacell,Armacell India Pvt Ltd,734,567.0
+At India,At India Auto Parts Priva,3729,868.0
+Badve Auto Gujrat,BADVE AUTO TECH PVT LTD,3153,1654.0
+Badve Engg NEEM,Badve Engineering Limited,1636,1949.0
+Badve Engg Pirangut,Badve Engineering Ltd -,3795,4465.0
+Badve Engg 16,Badve Engineering Ltd - X,391,205.0
+Badve 3K Aurangabad,BADVE AUTOCOMPS PVT.LTD 3,886,709.0
+Bayforge,BAYFORGE PRIVATE LIMITED,1319,154.0
+Bilz Tool,Bilz Tool Private Limited,269,94.0
+Bharat Forge Baramati,Bharat Forge Limited,2003,1055.0
+BFL Pune NEEM,BHARAT FORGE LTD.,8294,4347.0
+Bosch Banglore,Bosch Automotive Electron,4303,1001.0
+Bosch Adugudi & Bidadi,Bosch Limited,7791,910.0
+Bosch Pune,Bosch Chassis System Indi,30,4.0
+Bhavani,Bhavani Industries,71,14.0
+Brainbees,Brainbees Solutions Pvt L,682,362.0
+Cargill.,Cargill India Pvt Ltd,204,74.0
+Ceratizit,Ceratizit Bengaluru Priva,477,112.0
+Clover NEEM,Clover Forging & Machinin,1782,929.0
+Cogeme,Cogeme Precision Parts (I,5211,1827.0
+Cooper,Cooper Standard Automotiv,361,425.0
+Cooper Satara,Cooper Corporation Pvt Lt,2834,987.0
+Cooper Satara M60,Cooper Corporation Pvt Lt,0,0.0
+Cooper Satara M61,Cooper Corporation Pvt Lt,1,0.0
+Cooper Satara K11,Cooper Corporation Pvt Lt,0,0.0
+Cooper Satara K10,Cooper Corporation Pvt Lt,0,0.0
+Cooper Satara L 3,Cooper Corporation Pvt Lt,0,0.0
+Cooper Satara E 1,Cooper Corporation Pvt Lt,0,0.0
+Cooper Satara ZSE,Cooper Corporation Pvt Lt,0,0.0
+Cooper Satara J 2,Cooper Corporation Pvt Lt,0,0.0
+Datacorp Banglore,DataCorp Traffic Private ,3162,735.0
+Datacorp Dharmapuri,DataCorp Traffic Private ,4324,1008.0
+Datacorp Gurgaon,DATACORP TRAFFIC PRIVATE ,1748,406.0
+Datacorp Madurai,Datacorp Traffic Private ,1616,189.0
+Digital Age,Digital Age Retail Pvt Lt,71,32.0
+DRI India,DRI India Relays Private ,466,112.0
+Delfingen,Delfingen India Pvt Ltd,972,336.0
+Durovalves,Durovalves India Pvt Ltd,3917,2063.0
+Dynamatic Aerospace,Dynamatic Technologies Li,2424,850.0
+Eximius Infratech,Eximius Infra Tech Soluti,367,189.0
+Fairfield,Fairfield Atlas Limited,2902,2292.0
+Fairfield,Fairfield Atlas Limited,2902,2292.0
+Fenace Auto,Fenace Auto Limited,422,496.0
+Garware Wai,Garware Technical Fibres ,1834,2162.0
+Grupo,Grupo Antolin India Priva,489,378.0
+Hager Plant 2,Hager Electro Private Lim,3968,1386.0
+Herman Miller,Herman Miller Furniture (,469,112.0
+Harman NEEM,Harman International Indi,2921,1018.0
+Walvoil,WALVOIL FLUID POWER INDIA,1815,420.0
+Hical EC3,Hical Technologies Pvt. L,304,105.0
+Hical E1,Hical Technologies Pvt. L,5351,1869.0
+Hyundai Steel,HYUNDAI STEEL PIPE INDIA ,4830,564.0
+IFB,IFB Industrial Ltd,5661,1323.0
+Indiana,Indiana Gratings Pvt Ltd,2286,798.0
+India Kawasaki,India Kawasaki Motors Pvt,262,213.0
+Indo Honga,Indo Schottle Auto Parts ,0,0.0
+Indo Honga,Indo Schottle Auto Parts ,0,0.0
+Indo SEZ,Indo Schottle Auto Parts ,4399,1544.0
+ITC,ITC Food Limited,1642,578.0
+Jabil,Jabil Circuit India Pvt L,9535,2226.0
+Jabil,Jabil Circuit India Pvt L,9535,2226.0
+Jayshree Electron,Jayshree Electron Pvt Ltd,951,756.0
+Jayshree Eletrodevices,Jayashree Electro Devices,266,213.0
+Jayshree Encoders,Jayashree Encoders Pvt Lt,440,354.0
+JK Precision,JK Precision And Tools,312,70.0
+Kern Lieber,Kern-Liebers( India) Pvt ,2657,1402.0
+Kemwell,Kemwell Biopharm Pvt Ltd,343,77.0
+KFIL NEEM,Kirloskar Ferrous Industr,4105,2158.0
+KFIL NEEM,Kirloskar Ferrous Industr,4105,2158.0
+Kosei Minda,Kosei Minda Alumiun Compa,33,10.0
+Konecranes,Konecranes and Demag Priv,933,732.0
+KSPG,KSPG Automotive India Pvt,1806,945.0
+KSPG Supa,KSPG Automotive India Pri,120,63.0
+KSPG Mechatronics,KSPG Automotive India Pvt,294,158.0
+KSPG,KSPG Automotive India Pvt,1806,945.0
+KSPG Supa,KSPG Automotive India Pri,120,63.0
+KSPG Mechatronics,KSPG Automotive India Pvt,294,158.0
+Lumax Kolar,Lumax Auto Technologies L,4461,2347.0
+Lumax Kolar,Lumax Auto Technologies L,4461,2347.0
+Lumax Kolar,Lumax Auto Technologies L,4461,2347.0
+Lumax Bidadi,Lumax Industries Ltd,2025,1071.0
+MHL Urse NEEM,MAHINDRA CIE Automotive L,5895,2058.0
+Mahindra Gear,Mahindra CIE Automotive L,1988,1040.0
+Mahindra CIE Rajkot,Mahindra CIE Automotive L,653,520.0
+Magellan,Magellan Aerospace (India,60,14.0
+Maxion,Maxion Wheels Aluminum In,3261,1144.0
+Menon NEEM,Menon & Menon Limited -,3992,4713.0
+Menon Kagal NEEM,Menon & Menon Limited..,1300,1524.0
+Minda Hosur,Minda Industries Ltd,4529,2378.0
+Minda Lighting,Minda Industries Ltd (Lig,2162,2552.0
+Minda Switch Div,Minda Industries Ltd (Swi,2112,2481.0
+Minda Sensor 2,Minda Industries Ltd (Sen,1295,1524.0
+Minda Chennai,MINDA INDUSTRIES LTD (LIG,1192,630.0
+Mitsuba,Mitsuba Sical India Priva,1428,756.0
+MINDA KATOOLEC,MINDA KATOOLEC ELECTRONIC,1393,724.0
+Minda Kyoraku,MINDA KYORAKU LIMITED,323,260.0
+Mutual Shikrapur,MUTUAL AUTOMOTIVE PRIVATE,914,709.0
+Mutual Sanaswadi.,MUTUAL AUTOMOTIVE PRIVATE,904,709.0
+Schneider Chennai,M/S. Schneider Electric I,6732,1568.0
+Metro Cash DC 26,Metro Cash and Carry Indi,3037,707.0
+Metro Cash DC 19,Metro Cash and Carry Indi,1951,455.0
+Metro Cash DC 10,Metro Cash and Carry Indi,3982,931.0
+Metro Cash DC 11,Metro Cash and Carry Indi,3273,763.0
+Metro Cash DC 18,Metro Cash and Carry Indi,2867,672.0
+Metro Cash DC 27,Metro Cash and Carry Indi,2703,630.0
+Metro Cash DC 60,Metro Cash and Carry Indi,2208,518.0
+Metro Cash DC 29,Metro Cash and Carry Indi,2162,1134.0
+Metro Cash DC 15,Metro Cash and Carry Indi,1319,462.0
+Metro Cash DC 12,Metro Cash and Carry Indi,2089,1102.0
+Metro Cash DC 25,Metro Cash and Carry Indi,499,60.0
+Metro Cash DC 24,Metro Cash and Carry Indi,330,116.0
+Metro DC 52,Metro Cash and Carry Indi,1401,740.0
+Metro Cash DC 16,Metro Cash and Carry Indi,3697,1292.0
+Metro Cash DC 47,Metro Cash and Carry Indi,1300,677.0
+Metro Cash DC 53,Metro Cash and Carry Indi,1206,140.0
+Metro Cash DC 45,Metro Cash and Carry Indi,1179,273.0
+Metro Cash DC 46,Metro Cash and Carry Indi,2046,1071.0
+Metro Cash DC 43,Metro Cash and Carry Indi,1174,614.0
+Metro Cash DC 17,Metro Cash and Carry Indi,2584,602.0
+Metro Cash DC 32,Metro Cash and Carry Indi,1826,961.0
+Metro Cash DC 28,METRO Cash & Carry India ,349,42.0
+Metro Cash DC 48,Metro Cash and Carry Indi,1296,301.0
+Metro Cash DC 54,Metro Cash and Carry Indi,1435,756.0
+Mivin Engg,Mivin Engg Technologies P,607,140.0
+Nipro,Nipro India Corporation P,12233,4284.0
+Nipro Pharma,Nipro Pharma Packaging In,2083,724.0
+Norma,Norma Group Products Indi,702,362.0
+Nexteer,Nexteer Automotive India ,720,252.0
+Nexteer Pune,Nexteer Automotive India ,99,32.0
+MSSL NEEM,Mahindra Sanyo Special St,458,79.0
+Ohsung,Ohsung Electronics India ,2065,1087.0
+Otto Bilz,Otto Bilz India Pvt Ltd,130,42.0
+Owari,Owari Precision Products ,1644,385.0
+Premium,Premium Transmission Limi,2443,1914.0
+Precision Plastic,Precision Plastic Enginee,318,173.0
+PPG,PPG ASIAN PAINTS PRIVATE ,1463,514.0
+Paras,Paras Power Engineering P,421,496.0
+Plansee,Plansee India High Perfor,564,133.0
+Rao Nursing,Rao Nursing Home,740,262.0
+R Vision,R-Vision Plastic Industri,31,24.0
+Recipharma,Recipharm Pharmaservices ,1262,441.0
+Renata Karandi,RENATA PRECISION COMPONEN,3195,1124.0
+Renata Bhosari,RENATA PRECISION COMPONEN,298,105.0
+Renata Sector 7,Renata Precision Componen,438,158.0
+Rinder Chakan,RINDER INDIA PVT. LTD.,672,780.0
+Minda Rinder Hosur,Minda Rinder Private Limi,2206,2622.0
+Rokiminda,ROKIMINDA CO PRIVATE LTD,2128,746.0
+San & San,San and San Auto Private ,311,354.0
+Selec Control,Selec Control Pvt Ltd,1169,410.0
+Selec EL 67,Selec Control Pvt Ltd.,1027,357.0
+Selec EL 180,Selec Control Pvt Ltd,2396,840.0
+Selec EL 171,Selec Control Pvt Ltd,864,304.0
+SFO,SFO Technologies Pvt Ltd,153,35.0
+Schneider Hyderabad,Schneider Electric India ,9494,7466.0
+Schneider Banglore,Schneider Electric IT Bus,4039,945.0
+Schneider Vadodara,Schneider Electric Infras,29,4.0
+Schneider Rudranagar,Schneider Electric IT Bus,646,77.0
+Schneider SEPFC,Schneider Electric SEPFC,6174,1442.0
+Schneider President,SCHNEIDER ELECTRIC PRESID,1467,343.0
+Shivam,Shivam Autotech Ltd,637,496.0
+Shubhra,Shubhra Plastics Private ,1218,969.0
+Stanley Lifestyle,Stanley Lifestyles Limite,1078,378.0
+Stanley Sofas,STANLEY OEM SOFAS LTD,942,163.0
+Stanzen,Stanzen Engineering Pvt L,1571,364.0
+Sulzer NEEM,Sulzer India Pvt. Ltd.,124,63.0
+Schmetz,Schmetz India Private Lim,515,119.0
+Seltech,SELTECH SALES & SERVICES,2407,1260.0
+Senapathy,Senapathy Whiteley Pvt Lt,1332,308.0
+Shirodkar,SHIRODKAR PRECI COMP PVT ,270,213.0
+Sujan,Sujan Cooper Standard AVS,582,673.0
+Saehan Stamping,Saehan Stamping Private L,3353,1764.0
+Tata Hitachi,Tata Hitachi Construction,2900,679.0
+Thyssenkrupp,Thyssenkrupp Elevator (In,581,200.0
+TMEIC PE Unit,TMEIC INDUSTRIAL SYSTEMS ,2813,658.0
+TMEIC RM Unit,TMEIC Industrial Systems ,7778,1813.0
+Tokai Rika,Tokai Rika Minda India Pv,6014,1400.0
+Toyota Boshoku,Toyota Boshoku Automotive,9039,2107.0
+Toyota Engine,Toyota Industries Engine ,8521,1988.0
+Toyota Boshoku Hosur,TOYOTA BOSHOKU AUTOMOTIVE,1004,231.0
+Toyoda Gosei,TOYODA GOSEI SOUTH INDIA ,2492,581.0
+Toyotetsu,Toyotetsu India Private L,3128,728.0
+Unibic,Unibic Foods India Privat,543,284.0
+VEPL_V,Varroc Engineering Pvt Lt,2910,1528.0
+Varroc Forging VII,Varroc Engineering Pvt Lt,401,205.0
+Varroc Val VII,Varroc Engineering Pvt Lt,2132,1118.0
+Varroc Chennai,Varroc Engineering Pvt. L,319,173.0
+VPPL II,Varroc Polymers Pvt Ltd -,2539,1339.0
+Varsa Plastic,Varsa Plastic Industries ,1580,1252.0
+Varsa Plastic Unit 2,Varsa Plastic Industries ,1224,969.0
+Varsa Plastic Unit 6,Varsa Plastic Industries ,27,24.0
+Varroc AMD,Varroc Engineering Ltd - ,356,189.0
+VEPL III,Varroc Engineering Ltd - ,2944,1544.0
+VEPL IV,Varroc Engineering Pvt Lt,3166,1670.0
+VEPL I,Varroc Engineering Ltd Pl,2813,1480.0
+VEPL II,Varroc Engineering Ltd Un,3808,1334.0
+VEPL VIII,Varroc Engineering Ltd Pl,834,441.0
+VEPL VI,Varroc Engineering Pvt Lt,1209,630.0
+VPPL I,Varroc Polymers Pvt Ltd -,2131,1118.0
+Varroc Chakan,Varroc Polymers Pvt Ltd (,145,79.0
+Visteon,Visteon Electronics India,3379,396.0
+Wipro,Wipro Kawasaki Precision ,1704,399.0
+Western Heat Bhosari,Western Heat And Forge Pv,103,106.0
+Yagachi,Yagachi Technologies Pvt ,2568,903.0
+Yuken Malur,Yuken India Limited,1131,266.0
+Yuken Peenya,Yuken India Limited,0,0.0
+Yash Precision,Yash Precision Plastics P,107,63.0
+Zamil Steel,Zamil Steel Buildings Ind,638,496.0
+MHL Bhosari,MAHINDRA CIE Automotive L,8067,4237.0
+LG,LG Electronics India Pvt ,9494,3318.0
+Haier,Haier Appliance India Pvt,2260,1181.0
+Renata Karandi Naps,Renata Precision Componen,22,5.0
+Alf Engg,ALF Engineering P Ltd,73,32.0
+ABB INDIA-Mysore,ABB INDIA LIMITED,198,74.0
+Atomberg,Atomberg Technologies Pvt,1281,677.0
+Arka Anand,Arka Anand Automation,62,32.0
+Britannia,Britannia Industries Limi,224,49.0
+Cataler India,Cataler India Auto Parts ,177,42.0
+Carlberg,Carlsberg India Pvt. Ltd.,292,70.0
+Carraro,CARRARO INDIA PVT LTD,432,147.0
+Connectwell,Connectwell Industries Pv,2095,1102.0
+Cummins HHP,Cummnins HHP,282,63.0
+Cummins PGBU,Cummins India Limited -SE,508,119.0
+Cummins PHP,Cummins technologies Ind ,1141,266.0
+Cummins IPDC,Cummins India Limited ,1642,385.0
+Cummins Recon,Cummins Technologies Indi,214,49.0
+Duroshox,Duroshox Pvt Ltd,42,35.0
+Fleetguard,Fleetguard Filters Privat,2092,490.0
+Gestamp,Gestamp automotive India ,582,449.0
+Interflex,Interflex Electronics Ind,664,154.0
+ITC Kolkata,ITC Limited,520,268.0
+ITC Uluberia,ITC FOOD PVT LTD .,1044,551.0
+Mercedes,Mercedes Benz,360,42.0
+Mercedes Blue Collar,Mercedes Benz,360,42.0
+Moldtek,Moldtek Packaging Ltd,9,0.0
+Neosym,Neosym Industry Ltd,3488,1827.0
+Posco,POSCO Maharashtra Steel P,48,21.0
+Rsthal,R.STAHL PRIVATE LIMITED,324,173.0
+Rajiv Plastic,Rajiv Plastics Pvt Ltd,174,94.0
+Remsons Daman,Remsons Industries Ltd.,874,1028.0
+Remsons Gurgaon,Remsons Industries Ltd,5420,6414.0
+Remsons A-23,Remsons Industries Ltd.,1,0.0
+Sakhti Gear Unit 2,Sakthi Gear Products (Uni,158,177.0
+Slidewell Nashik,Slidewell Meilleur Tech P,85,71.0
+Cummins TCL3,Tata Cummins Private Limi,833,196.0
+Cummins TCL2,Tata Cummins Private Limi,249,56.0
+Weir Mineral,WEIR MINERALS (INDIA) PRI,729,84.0
+Wheels India,Wheels India Ltd,118,63.0
+P2W,Piaggio Vehicles Pvt Ltd,913,472.0
+BFL Pune NEEM,BHARAT FORGE LTD,8294,6520.0
+Bharat Forge Baramati,Bharat Forge Limited,2003,1055.0
+Bharat Forge Baramati,Bharat Forge Limited,2003,1055.0
+Bharat Forge Baramati,Bharat Forge Limited,2003,1055.0
+Bharat Forge Baramati,Bharat Forge Limited,2003,1055.0
+Bharat Forge Baramati,Bharat Forge Limited,2003,1055.0
+Bharat Forge Baramati,Bharat Forge Limited,2003,1055.0
+BFL EL,BHARAT FORGE LTD,444,354.0
+LG,LG Electronics India Pvt ,9494,3318.0
+LG,LG Electronics India Pvt ,9494,3318.0
+LG,LG Electronics India Pvt ,9494,3318.0
+LG,LG Electronics India Pvt ,9494,3318.0
+LG,LG Electronics India Pvt ,9494,3318.0
+LG,LG Electronics India Pvt ,9494,3318.0
+Schneider Chennai,M/S. Schneider Electric I,6732,1568.0
+MHL Bhosari,MAHINDRA CIE Automotive L,8067,4237.0
+MHL Urse NEEM,MAHINDRA CIE Automotive L,5895,2058.0
+MHL Urse NEEM,MAHINDRA CIE Automotive L,5895,2058.0
+MHL Urse NEEM,MAHINDRA CIE Automotive L,5895,2058.0
+,Mahindra CIE Automotive L,148,79.0
+Menon NEEM,Menon & Menon Limited,3992,4713.0
+Menon Kagal NEEM,Menon & Menon Limited,1300,1524.0
+Menon NEEM,Menon & Menon Limited,3992,4713.0
+Menon Kagal NEEM,Menon & Menon Limited.,1300,1524.0
+Menon NEEM,Menon & Menon Limited,3992,4713.0
+Minda Hosur,Minda Industries Ltd,4529,2378.0
+Mate,Mothersons Automotive Tec,1559,819.0
+Neosym,Neosym Industry Ltd,3488,1827.0
+Neosym,Neosym Industry Ltd,3488,1827.0
+Ohsung,Ohsung Electronics India ,2065,1087.0
+Taparia,Taparia Tools Ltd,5830,4583.0
+Valeo,Valeo India Pvt Ltd,8255,4331.0
+Valeo,Valeo India Pvt Ltd,8255,4331.0
+Valeo,Valeo India Pvt Ltd,8255,4331.0
+Valeo,Valeo India Pvt Ltd,8255,4331.0
+VEPL_V,Varroc Engineering Pvt Lt,2910,1528.0
+VEPL VI,Varroc Engineering Pvt Lt,1209,630.0
+VPPL II,Varroc Polymers Pvt Ltd -,2539,1339.0
+VPPL I,Varroc Polymers Pvt Ltd -,2131,1118.0
+Varsa Plastic,Varsa Plastic Industries ,1580,1252.0
+Minda Rinder Hosur,Minda Rinder Private Limi,2206,2622.0
+Minda Switch Div,Minda Industries Ltd (Swi,2112,2481.0
+Supreme,Supreme Treon Pvt Ltd,539,425.0
+Badve CTPL,Badve Engineering Ltd CTP,0,0.0
+Badve APPL,Badve Engineering Ltd APP,0,0.0
+VEPL II,Varroc Engineering Ltd Un,3808,1334.0

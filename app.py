@@ -258,8 +258,9 @@ def showReport():
             cursor.execute("SELECT Company_ID,Name_of_Company,Services,Unit,IPP FROM ipp_company")
             data3 = cursor.fetchall()
             print(data3)
-            data = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Services','Unit','IPP'])
-            return render_template('showReport.html')
+            data4 = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Services','Unit','IPP'])
+            
+            
         elif request.form['submit_button']=='excel':
             
             mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
@@ -345,7 +346,7 @@ def showReport():
             return render_template('showReport.html')
 
                 
-    return render_template('showReport.html',data1=data3)
+    return render_template('showReport.html',data3=data3)
 
 @app.route('/cpp',methods = ['GET','POST'])
 def cpp():
@@ -767,6 +768,11 @@ def search():
         elif request.form['submit_button']=='edit':
                 option = request.form['idd']
                 if option == "Employee table":
+                    compid = request.form['empcompid']
+                    empname = request.form['empname']
+                    compname = request.form['empcompname']
+                    compinvoice = request.form['empcompinvoice']
+
 
                 elif option == "Company table":
                     compid = request.form['empcompid']
@@ -775,8 +781,11 @@ def search():
                     compinvoice = request.form['empcompinvoice']
                     mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
                     cursor=mydb.cursor()
-
+                    cursor.execute('UPDATE table company_master WHERE Company_ID = %s',(compid,))
+                    mydb.commit()
+                    cursor.close()
                 elif option == "Services":
+                    return render_template('search.html',data5=data5,d="Services")
 
 
     return render_template('search.html')
