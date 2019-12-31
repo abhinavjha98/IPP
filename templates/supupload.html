@@ -104,22 +104,38 @@
             </nav>
 
             <div class="line"></div>
-            <div class="row">
-                
-            
-<div class="col-md-3">
-            <button class="btn btn-primary"><a href="{{url_for('compnew')}}">Company upload</a> </button>
+<div class="row">
+<div class="col-md-10">
+  <h3>Select a file to upload for supervisor</h3>
+  <p>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class=flashes>
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  </p>
+  <form method="post" enctype="multipart/form-data">
+  <dl>
+  <p>
+  <input type="file" name="file" autocomplete="off" >
+  </p>
+  </dl>
+  <p>
+  <button type="submit" name="submit_button" value="Submit1" class="btn btn-primary mb-2">Submit</button>
+  </p>
+  <button type="submit" name="submit_button" value="delete" class="btn btn-primary mb-2 btn-danger">Delete old data</button>
+  </form>
+</div>
+
+</div>
+
         </div>
-        <div class="col-md-3">
-            <button class="btn btn-success"><a href="{{url_for('empnew')}}">Employee upload</a></button>
-            </div>
-            <div class="col-md-3">
-            <button class="btn btn-info"><a href="{{url_for('serviceupload')}}">Services and Units</a></button>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-info"><a href="{{url_for('supupload')}}">Supervisor</a></button>
-        </div>
-        </div>
+    </div>
+
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->

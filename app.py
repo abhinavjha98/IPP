@@ -382,7 +382,7 @@ def cpp():
             cursor.execute("SELECT * FROM services_invoice")
             data3 = cursor.fetchall()
             print(data3)
-            data = pd.DataFrame(data3,columns=['Name_of_Company','Company_ID','Services','Unit','Invoice_Value'])
+                    
             cursor=mydb.cursor()
 
             cursor.execute("SELECT * FROM employee_masters")
@@ -582,6 +582,53 @@ def empupload():
             cursor.close()
             return render_template('empupload.html')
     return render_template('empupload.html')
+
+@app.route('/supsupload',methods = ['GET','POST'])
+def supsupload():
+    if request.method == 'POST':
+        
+        if request.form['submit_button']=='Submit1':
+            if 'file' not in request.files:
+
+                return redirect(request.url)
+            file = request.files['file']
+            if file.filename == '':
+                flash('No file selected for uploading')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+                print('database connected')
+
+                cursor=mydb.cursor()
+                csv_data = csv.reader(open('E:/PROJECT/ipp/uploads/'+filename))
+                print(csv_data)
+                for row in csv_data:
+                    print(len(row))
+                    cursor.execute('INSERT INTO supervisor (Name,SrSupervisor,HR_Officer,Regional_Officer,Company,Company_ID) VALUES (%s,%s,%s,%s,%s,%s)',row)
+                    print(row)
+                mydb.commit()
+                cursor.close()
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('File successfully uploaded')
+                return redirect(request.url)
+            else:
+                flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+                return redirect(request.url)
+        elif request.form['submit_button']=='delete':
+
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            cursor.execute('TRUNCATE TABLE employee_masters')
+
+            mydb.commit()
+            cursor.close()
+            return render_template('supupload.html')
+    return render_template('supupload.html')
 @app.route('/servicesupload',methods = ['GET','POST'])
 def serviceupload():
     if request.method == 'POST':
@@ -789,6 +836,42 @@ def search():
 
 
     return render_template('search.html')
+
+@app.route('/supervisor',methods = ['GET','POST'])
+def supervisor():
+    if request.method == "POST":
+        if request.form['submit_button']=='IPP':
+            
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+            print('database connected')
+            cursor=mydb.cursor()
+            cursor.execute("SELECT Company_ID,Name_of_Company,Unit,IPP FROM ipp_company")
+            data3 = cursor.fetchall()
+            print(data3)
+            data2 = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Unit','IPP'])
+            cursor.execute("SELECT * FROM supervisor")
+            data5 = cursor.fetchall()
+            data = pd.DataFrame(data5,columns=['Name','Sr.Supervisor','HROfficer','RegionalOfficer','Name_of_Company','Company_ID'])
+            data1 = data.groupby(['Company_ID'])['Name'].agg('count').reset_index().sort_values(by='Company_ID',ascending=True)
+            data1 = data1.rename(columns=  {"Name": "Count"}) 
+            print(data1)
+            data4=pd.merge(data1,data2,on='Company_ID')
+            data4=data4.reset_index()
+            data4['individual'] = data4['IPP']/data4['Count']
+            a1 = pd.DataFrame(data['Sr.Supervisor'])   
+            a1 = a1.reset_index().head() 
+            a = data['Sr.Supervisor'].unique()
+            a1.head()
+            a11 = pd.DataFrame(a)
+            a11 = a11.dropna()
+            a11.nunique()
+            a11= a11.rename(columns={0:'Sr.Supervisor'})
+            data8=pd.merge(data,data4,on='Company_ID')
+            data8.head()
+            data8=data8.reset_index()
+            data8 = data8.rename(columns=  {"Name_of_Company_x": "Name_of_Company"}) 
+            print(data8)
+    return render_template('supervisor.html',data8=data8)
 
 if __name__=='__main__':
     app.run(debug=True)

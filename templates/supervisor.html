@@ -25,7 +25,7 @@
 
     <div class="wrapper">
         <!-- Sidebar  -->
-       <nav id="sidebar" style="background-color: #007bff;">
+        <nav id="sidebar" style="background-color: #007bff;">
             <div class="sidebar-header" style="background-color: #dc3545">
                 <h3><a href="{{url_for('index')}}">IPP</a></h3>
             </div>
@@ -103,23 +103,59 @@
                 </div>
             </nav>
 
-            <div class="line"></div>
-            <div class="row">
+            <form method="POST">
+                <div class="row">
+                    <div class="col-md-3">
+                       <button class="btn btn-primary" name="submit_button" value="GIPP">Supervisor</button>
+                    </div>
+                    <div class="col-md-3">
+                         <button class="btn btn-primary" name="submit_button" value="IPP">Senior Supervisor</button>
+                    </div>
+                    <div class="col-md-3">
+                      <button class="btn btn-primary" name="submit_button" value="excel">HR Officer</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary" name="submit_button" value="delete">Regional Officer</button>
+                    </div>
+                    </div>
+                 
+               
                 
-            
-<div class="col-md-3">
-            <button class="btn btn-primary"><a href="{{url_for('compnew')}}">Company upload</a> </button>
+                
+
+
+            </form>
+            <div class="line"></div>
+
+             
+        
+
+            <table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col">Name of employee</th>
+      <th scope="col">Money</th>
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+
+     {% for user in data8 %}
+        <tr>
+   <th scope="row">{{user[1]}}</th>
+    <td> {{user[12]}} </td>
+    
+        </tr>
+  {% endfor %}
+    
+  </tbody>
+</table>
+
         </div>
-        <div class="col-md-3">
-            <button class="btn btn-success"><a href="{{url_for('empnew')}}">Employee upload</a></button>
-            </div>
-            <div class="col-md-3">
-            <button class="btn btn-info"><a href="{{url_for('serviceupload')}}">Services and Units</a></button>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-info"><a href="{{url_for('supupload')}}">Supervisor</a></button>
-        </div>
-        </div>
+    </div>
+
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
