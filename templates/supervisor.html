@@ -105,19 +105,11 @@
 
             <form method="POST">
                 <div class="row">
+                    
                     <div class="col-md-3">
-                       <button class="btn btn-primary" name="submit_button" value="GIPP">Supervisor</button>
+                         <button class="btn btn-primary" name="submit_button" value="IPP">Calculate Supervisor</button>
                     </div>
-                    <div class="col-md-3">
-                         <button class="btn btn-primary" name="submit_button" value="IPP">Senior Supervisor</button>
-                    </div>
-                    <div class="col-md-3">
-                      <button class="btn btn-primary" name="submit_button" value="excel">HR Officer</button>
-                    </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-primary" name="submit_button" value="delete">Regional Officer</button>
-                    </div>
-                    </div>
+                    
                  
                
                 
@@ -142,10 +134,10 @@
   </thead>
   <tbody>
 
-     {% for user in data8 %}
+     {% for user in data11 %}
         <tr>
-   <th scope="row">{{user[1]}}</th>
-    <td> {{user[12]}} </td>
+   <th scope="row">{{user[0]}}</th>
+    <td> {{user[1]}} </td>
     
         </tr>
   {% endfor %}

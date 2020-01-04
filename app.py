@@ -379,8 +379,9 @@ def cpp():
             mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
             print('database connected')
             cursor=mydb.cursor()
-            cursor.execute("SELECT * FROM services_invoice")
+            cursor.execute("SELECT Invoice_Value FROM services_invoice")
             data3 = cursor.fetchall()
+            data = pd.DataFrame(data3,columns=['Invoice_Value'])
             print(data3)
                     
             cursor=mydb.cursor()
@@ -839,39 +840,275 @@ def search():
 
 @app.route('/supervisor',methods = ['GET','POST'])
 def supervisor():
+    data11=[]
     if request.method == "POST":
         if request.form['submit_button']=='IPP':
             
             mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
             print('database connected')
             cursor=mydb.cursor()
-            cursor.execute("SELECT Company_ID,Name_of_Company,Unit,IPP FROM ipp_company")
+            cursor.execute("SELECT * FROM super")
             data3 = cursor.fetchall()
-            print(data3)
-            data2 = pd.DataFrame(data3,columns=['Company_ID','Name_of_Company','Unit','IPP'])
-            cursor.execute("SELECT * FROM supervisor")
+            data2 = pd.DataFrame(data3,columns=['Name','Sr.Supervisor','HR Officer','Regional Officer'])
+            print(data2)
+
+            cursor.execute("SELECT * FROM empmaster")
             data5 = cursor.fetchall()
-            data = pd.DataFrame(data5,columns=['Name','Sr.Supervisor','HROfficer','RegionalOfficer','Name_of_Company','Company_ID'])
-            data1 = data.groupby(['Company_ID'])['Name'].agg('count').reset_index().sort_values(by='Company_ID',ascending=True)
-            data1 = data1.rename(columns=  {"Name": "Count"}) 
+            data1 = pd.DataFrame(data5,columns=['Name',"Company Name"])
             print(data1)
-            data4=pd.merge(data1,data2,on='Company_ID')
-            data4=data4.reset_index()
-            data4['individual'] = data4['IPP']/data4['Count']
-            a1 = pd.DataFrame(data['Sr.Supervisor'])   
-            a1 = a1.reset_index().head() 
-            a = data['Sr.Supervisor'].unique()
-            a1.head()
+
+            cursor.execute("SELECT * FROM compipp")
+            data6 = cursor.fetchall()
+            data = pd.DataFrame(data6,columns=['Company Name',"IPP"])
+            data["IPP"] = pd.to_numeric(data["IPP"])
+            print(data.dtypes)
+            print(data)
+
+            data4 = data1.groupby(['Company Name'])['Name'].agg('count').reset_index().sort_values(by='Company Name',ascending=True)
+            data4 = data4.rename(columns=  {"Name": "Count"}) 
+            
+            data5=pd.merge(data,data4,on='Company Name')
+            data5=data5.reset_index()
+            data5['individual_ipp']=data5['IPP']/data5['Count']
+
+            data6=pd.DataFrame()
+            data6['Company Name']= data5['Company Name']
+            data6['individual_ipp']= data5['individual_ipp']
+            data7=pd.merge(data1,data6,on='Company Name')
+            data7=data7.reset_index()
+            data7 = data7.drop(['index'],axis=1)
+            print(data7)
+            print(data2)
+            data2.set_value(1,"Name","Raja")
+            data2.set_value(0,"HR Officer","Amol")
+            data9=pd.merge(data2,data7,on='Name')
+            print(data9)
+            print(data2['Name'])
+            
+            print(data2)
+
+            a = data2['Sr.Supervisor'].unique()
+            a111 = pd.DataFrame(a)
+            a111 = a111.dropna()
+            a111.nunique()
+            a111= a111.rename(columns={0:'Sr.Supervisor'})
+            a111['sup_amount']=0
+            print(a111)
+            ff=[]
+            ct = 0
+            for j in a111.index:
+                b = a111.get_value(j,'Sr.Supervisor') 
+                s = 0
+                ll=[]
+                final=0
+                for i in data9.index:
+                    a = data9.get_value(i,'Name')
+                    c = data9.get_value(i,'Sr.Supervisor')
+                    d = data9.get_value(i,'individual_ipp')
+                    if b == c:
+                        ct = ct + 1
+                        s = s + d*0.20
+                        ll.append(d)
+                        if s > max(ll):
+                            continue
+                        else:
+                            final=max(ll)
+                            final=final+final*0.10
+                            print(b,final,i)
+                            a111.set_value(j,'sup_amount',final)
+
+                print(a111)
+            a = data9['HR Officer'].unique()
             a11 = pd.DataFrame(a)
             a11 = a11.dropna()
             a11.nunique()
-            a11= a11.rename(columns={0:'Sr.Supervisor'})
-            data8=pd.merge(data,data4,on='Company_ID')
-            data8.head()
-            data8=data8.reset_index()
-            data8 = data8.rename(columns=  {"Name_of_Company_x": "Name_of_Company"}) 
-            print(data8)
-    return render_template('supervisor.html',data8=data8)
+            a11= a11.rename(columns={0:'HR Officer'})
+            a11['amount']=0
+            print(a11)
+            ff=[]
+            for j in a11.index:
+                b = a11.get_value(j,'HR Officer') 
+                s = 0
+                ll=[]
+                final=0
+                d=0
+                fi=0
+                count = 1
+                for i in data9.index:
+    
+                    a = data9.get_value(i,'Name')
+                    f = data9.get_value(i,'Sr.Supervisor')
+                    c = data9.get_value(i,'HR Officer')
+                    d = data9.get_value(i,'individual_ipp')
+                    if b == c:
+                        if f == 1:
+                            if a==2:
+                                continue
+                            else:
+                                ct = ct + 1
+                                d=d*0.10
+                                fi=fi+d
+                                print(c,a,d,fi)
+                                continue
+                        for k in a111.index:
+                            g = a111.get_value(k,'Sr.Supervisor')
+                            if f == g:
+          
+                                if count == 1:
+                                    h = a111.get_value(k,'sup_amount')
+                                    fi = fi + h*0.20
+                                    count = 0
+      
+                                    print(c,f,h,fi)
+                    a11.set_value(j,'amount',fi)
+            print(a11)
+            for j in a11.index:
+                ff=[]
+                b = a11.get_value(j,'HR Officer') 
+                amount = a11.get_value(j,'amount')
+                s = 0
+                ll=[]
+                final=0
+                d=0
+                fi=0
+                maxi=0
+                count = 1
+                for i in data9.index:
+    
+                    a = data9.get_value(i,'Name')
+                    f = data9.get_value(i,'Sr.Supervisor')
+                    c = data9.get_value(i,'HR Officer')
+                    d = data9.get_value(i,'individual_ipp')
+    
+                    if b == c:
+                        if f == 1:
+                            if a==2:
+                                continue
+                            else:
+                                continue
+                        for k in a111.index:
+                            g = a111.get_value(k,'Sr.Supervisor')
+                            if f == g:
+          
+                                if count == 1:
+                                    
+                                    h = a111.get_value(k,'sup_amount')
+                                    ff.append(h)
+                                    print(b,g,h)
+                maxi = max(ff)
+                if amount > maxi:
+                    amount = amount
+                else:
+                    amount = maxi + maxi*0.10
+                a11.set_value(j,'amount',amount)
+                print(ff,amount)
+            a1 = data9['Regional Officer'].unique()
+            b1 = pd.DataFrame(a1)
+            b1 = b1.dropna()
+            b1.nunique()
+            b1= b1.rename(columns={0:'RegionalOfficer'})
+
+            b1['regamount']=0
+            for i in b1.index:
+                ff = 0
+                supp=""
+                hr=""
+                ro = b1.get_value(i,'RegionalOfficer')
+                for j in data9.index:
+    
+                    a = data9.get_value(j,'Name')
+                    f = data9.get_value(j,'Sr.Supervisor')
+                    c = data9.get_value(j,'HR Officer')
+                    d = data9.get_value(j,'individual_ipp')
+                    b = data9.get_value(j,'Regional Officer')
+                    if ro == b:
+                        ff = ff+d*0.10
+                        print(b,a,ff)
+                    for k in a111.index:
+                        sup = a111.get_value(k,'Sr.Supervisor')
+                        am =  a111.get_value(k,'sup_amount')
+                        if f == sup:
+                            if sup == supp:
+                                continue
+                            else:
+                                ct = ct+1
+                                supp=sup
+                                ff=ff+am*.20
+                                print(ff)
+                        for l in a11.index:
+                            sup = a11.get_value(l,'HR Officer')
+                            am =  a11.get_value(l,'amount')
+                            if c == sup:
+                                if sup == hr:
+                                    continue
+                                else:
+                                    hr=sup
+                                    print(sup)
+                                    ff=ff+am*0.25
+                                    print(ff)
+            b1.set_value(i,'regamount',ff)
+            data10 = data9.groupby(['Regional Officer'])['Name'].agg('count').reset_index().sort_values(by='Regional Officer',ascending=True)
+            data10 = data10.rename(columns=  {"Name": "Count"}) 
+            print(data10)
+            for i in b1.index:
+                ro = b1.get_value(i,'RegionalOfficer')
+                am = b1.get_value(i,'regamount')
+                for j in data10.index:
+                    roo = data10.get_value(j,'Regional Officer')
+                    if ro == roo:
+                        cc = data10.get_value(j,'Count')
+                        am=am+150+150+(ct+1+1)*5
+                        b1.set_value(i,'regamount',am)
+            dff = pd.DataFrame()
+            dff['Name'] = 0
+            dff['amount'] = 0
+            for i in data9.index:
+                a = data9.get_value(i,'Name')
+                b = data9.get_value(i,'individual_ipp')
+                dff.set_value(i,'Name',a)
+                dff.set_value(i,'amount',b)
+            abb=i
+            print(i)
+            i = i+1
+            for j in a111.index:
+                a = a111.get_value(j,'Sr.Supervisor')
+                b = a111.get_value(j,'sup_amount')
+                dff.set_value(i,'Name',a)
+                dff.set_value(i,'amount',b)
+                i = i+1
+            print(i)
+            for k in a11.index:
+                a = a11.get_value(k,'HR Officer')
+                b = a11.get_value(k,'amount')
+                dff.set_value(i,'Name',a)
+                dff.set_value(i,'amount',b)
+                i = i+1
+            for k in b1.index:
+                a = b1.get_value(k,'RegionalOfficer')
+                b = b1.get_value(k,'regamount')
+                dff.set_value(i,'Name',a)
+                dff.set_value(i,'amount',b)
+                i = i+1
+            print(dff)
+            print(ct+1)
+            mydb = ms.connect(host='localhost',user='root',password='',database='ipp')
+
+            print('database connected')
+
+            cursor=mydb.cursor()
+            cursor.execute('TRUNCATE table final_amount')
+            for i,row in dff.iterrows():
+                    print(i,row)
+                    sql = "INSERT INTO final_amount (Name,amount) VALUES (" + "%s,"*(len(row)-1) + "%s)"
+                    cursor.execute(sql, tuple(row))
+            mydb.commit()
+            cursor.close()
+            cursor=mydb.cursor()
+            cursor.execute("SELECT * FROM final_amount")
+            data11 = cursor.fetchall()
+            
+
+    return render_template('supervisor.html',data11=data11)
 
 if __name__=='__main__':
     app.run(debug=True)
