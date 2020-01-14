@@ -287,7 +287,7 @@ def showReport():
             data = pd.DataFrame(data4,columns=['Name_of_Company','Company_ID','Services','Unit','Invoice Value'])
             cursor1.execute("SELECT * FROM company_master")
             data2=cursor1.fetchall()
-            data1 = pd.DataFrame(data2,columns=['Name_of_Company','Company_ID','Supervisor','Services','Model','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
+            data1 = pd.DataFrame(data2,columns=['Name_of_Company','Company_ID','Services','Model','Service_Charges','Actual_Stipend','Working_Condition','Facilities','others'])
             for i in data1.index:
                 id1 = data1.get_value(i,'Company_ID')
                 sc = data1.get_value(i,'Service_Charges')
@@ -744,7 +744,7 @@ def compnew():
 
                 for row in csv_data:
                     print(row)
-                    cursor.execute('INSERT INTO company_master (Name_of_Company,Company_ID,Supervisor,Services,Model,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
+                    cursor.execute('INSERT INTO company_master (Name_of_Company,Company_ID,Services,Model,Service_Charges,Actual_Stipend,Working_Condition,Facilities,others) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',row)
                     print(row)
                 mydb.commit()
                 cursor.close()
@@ -841,6 +841,7 @@ def search():
 @app.route('/supervisor',methods = ['GET','POST'])
 def supervisor():
     data11=[]
+    data7= pd.DataFrame()
     if request.method == "POST":
         if request.form['submit_button']=='IPP':
             
@@ -1108,7 +1109,7 @@ def supervisor():
             data11 = cursor.fetchall()
             
 
-    return render_template('supervisor.html',data11=data11)
+    return render_template('supervisor.html',data11=data11,tables=[data7.to_html(classes='data',index=False)],titles=data7.columns.values)
 
 if __name__=='__main__':
     app.run(debug=True)
