@@ -31,12 +31,12 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','xlsx','csv'
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/')
+@app.route('/',methods = ["GET","POST"])
 def index():
 
     return render_template('index2.html')
 
-@app.route('/login', methods = ['GET','POST'])
+@app.route('/login', methods = ["GET","POST"])
 def login():
     if request.method =='POST':
         if request.form['submit_button'] == 'register':
