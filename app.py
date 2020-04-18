@@ -1112,4 +1112,4 @@ def supervisor():
     return render_template('supervisor.html',data11=data11,tables=[data7.to_html(classes='data',index=False)],titles=data7.columns.values)
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run()
